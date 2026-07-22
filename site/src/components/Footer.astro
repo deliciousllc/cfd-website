@@ -1,0 +1,152 @@
+---
+// Footer — every fact verbatim from brand/products.md.
+// Hours, address, phone, email, socials, bill-pay link. Plus the required
+// concept-redesign disclaimer (spec: must not impersonate the official site).
+
+const tel = "tel:360-568-6017";
+
+// Hours — verbatim from products.md "Hours of operation" (inconsistent
+// abbreviations and the missing "am" on Thursday are intentional, reproduced).
+const hours = [
+  "Mon: 7:30am-4:00pm",
+  "Tues: 8:00am-4:30pm",
+  "Wednesday: 7:30am-5:00pm",
+  "Thursday: 7:30-4:00pm",
+  "Friday: By Appointment Only",
+  "Saturday & Sunday: Closed",
+];
+
+const billPay = "https://bestcardteam.com/Payments/?Profile=centennialfamPAY";
+const instagram = "https://www.instagram.com/cfdentistrysnoho/";
+const facebook = "https://www.facebook.com/CFDsnohomish/";
+const email = "info@cfdentistrysnohomish.com";
+---
+
+<footer class="footer">
+  <div class="footer__inner container">
+    <div class="footer__grid">
+      <section class="footer__col" aria-labelledby="footer-contact">
+        <h2 id="footer-contact" class="footer__heading">Centennial Family Dentistry</h2>
+        <address class="footer__address">
+          133 Maple Ave<br />
+          Snohomish WA 98290
+        </address>
+        <p class="footer__line">
+          <a class="footer__link" href={tel}>Phone: 360-568-6017</a>
+        </p>
+        <p class="footer__line">Fax: 360-568-9331</p>
+        <p class="footer__line">
+          <a class="footer__link" href={`mailto:${email}`}>{email}</a>
+        </p>
+        <a class="footer__cta btn-call" href={tel}>Call 360-568-6017</a>
+      </section>
+
+      <section class="footer__col" aria-labelledby="footer-hours">
+        <h2 id="footer-hours" class="footer__heading">Hours of Operation</h2>
+        <ul class="footer__hours">
+          {hours.map((h) => <li>{h}</li>)}
+        </ul>
+      </section>
+
+      <section class="footer__col" aria-labelledby="footer-connect">
+        <h2 id="footer-connect" class="footer__heading">Connect</h2>
+        <ul class="footer__links-list">
+          <li>
+            <a class="footer__link" href={instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+          </li>
+          <li>
+            <a class="footer__link" href={facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+          </li>
+          <li>
+            <a class="footer__link" href={billPay} target="_blank" rel="noopener noreferrer">Online Bill Pay</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="footer__disclaimer">
+      Concept redesign by Delicious LLC — not the practice&rsquo;s official site.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-paper);
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-3xl);
+  }
+
+  .footer__inner {
+    padding-block: var(--space-2xl) var(--space-xl);
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer__heading {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer__address {
+    font-style: normal;
+    color: var(--color-ink);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer__line {
+    color: var(--color-ink);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .footer__link {
+    color: var(--color-green);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer__link:hover {
+    color: var(--color-green-deep);
+  }
+
+  .footer__cta {
+    margin-top: var(--space-sm);
+  }
+
+  .footer__hours,
+  .footer__links-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer__hours li {
+    color: var(--color-ink);
+    padding-block: var(--space-3xs);
+  }
+
+  .footer__disclaimer {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    max-width: none;
+  }
+
+  @media (min-width: 768px) {
+    .footer__grid {
+      grid-template-columns: 2fr 1.2fr 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+</style>

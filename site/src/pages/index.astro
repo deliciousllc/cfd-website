@@ -1,6 +1,48 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-<html lang="en">
-  <head><meta charset="utf-8" /><title>Centennial Family Dentistry</title></head>
-  <body><h1>Scaffold OK</h1></body>
-</html>
+
+<BaseLayout
+  title="Home | Centennial Family Dentistry Snohomish"
+  description="Centennial Family Dentistry. We are a Snohomish dentist here to provide a dental home focused on prevention, education, compassion and meticulous dental care"
+>
+  <section class="container placeholder">
+    <p class="placeholder__eyebrow">Concept redesign</p>
+    <h1>Centennial Family Dentistry</h1>
+    <p class="placeholder__lede">
+      The Office of Dr. Eve Rutherford DDS, Dr. Rachel Greene DDS, and Dr.
+      Samiksha Gulrajani DMD.
+    </p>
+    <p>
+      This is a placeholder home page for the shared shell — the real home page
+      arrives in a later task. The navigation and footer below are the evergreen
+      identity in the browser.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .placeholder {
+    padding-block: var(--space-2xl);
+  }
+
+  .placeholder__eyebrow {
+    font-family: var(--font-ui);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-green);
+    margin-bottom: var(--space-sm);
+  }
+
+  .placeholder h1 {
+    margin-bottom: var(--space-md);
+  }
+
+  .placeholder__lede {
+    font-size: var(--text-lg);
+    color: var(--color-ink-muted);
+    margin-bottom: var(--space-md);
+  }
+</style>

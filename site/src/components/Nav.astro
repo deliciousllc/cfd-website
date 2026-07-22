@@ -1,0 +1,150 @@
+---
+// Nav — locked spec (Task 9): no hamburger, no JS.
+// ≥768px: single bar (wordmark left; links; Call button right).
+// <768px: two rows (row 1: wordmark + Call; row 2: three links evenly spaced).
+// Active page derives from Astro.url.pathname here — no prop from BaseLayout.
+
+const base = import.meta.env.BASE_URL; // e.g. "/cfd-website/" or "/cfd-website"
+
+// Base-aware href builder. route "" -> home; "services" | "about" otherwise.
+const href = (route: string) => {
+  const b = base.endsWith("/") ? base : base + "/";
+  return route === "" ? b : b + route + "/";
+};
+
+// Normalize the current route: strip the BASE_URL prefix and any trailing slash.
+// Result is "" (home), "services", or "about".
+const stripTrailing = (s: string) => s.replace(/\/+$/, "");
+let path = Astro.url.pathname;
+let baseNoTrail = stripTrailing(base);
+if (baseNoTrail && path.startsWith(baseNoTrail)) {
+  path = path.slice(baseNoTrail.length);
+}
+const current = stripTrailing(path).replace(/^\/+/, ""); // "" | "services" | "about"
+
+const links = [
+  { route: "", label: "Home" },
+  { route: "services", label: "Services & Pricing" },
+  { route: "about", label: "About" },
+];
+
+const logoSrc = href("").replace(/\/$/, "") + "/images/logo.jpg";
+const tel = "tel:360-568-6017";
+---
+
+<header class="nav">
+  <div class="nav__inner container">
+    <a class="nav__brand" href={href("")} aria-label="Centennial Family Dentistry — Home">
+      <img
+        class="nav__logo"
+        src={logoSrc}
+        width="591"
+        height="264"
+        alt="Centennial Family Dentistry"
+      />
+    </a>
+
+    <a class="nav__call btn-call" href={tel}>Call 360-568-6017</a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {links.map((link) => {
+        const isActive = current === link.route;
+        return (
+          <a
+            class:list={["nav__link", { "is-active": isActive }]}
+            href={href(link.route)}
+            aria-current={isActive ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        );
+      })}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav__inner {
+    display: grid;
+    /* Mobile: two rows.
+       row 1: brand (left) + call (right); row 2: links span both columns. */
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "brand call"
+      "links links";
+    align-items: center;
+    row-gap: var(--space-sm);
+    column-gap: var(--space-sm);
+    padding-block: var(--space-sm);
+  }
+
+  .nav__brand {
+    grid-area: brand;
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+  }
+
+  .nav__logo {
+    height: 44px;
+    width: auto;
+  }
+
+  .nav__call {
+    grid-area: call;
+    justify-self: end;
+  }
+
+  .nav__links {
+    grid-area: links;
+    display: flex;
+    justify-content: space-between; /* evenly spaced across the row on mobile */
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .nav__link {
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    padding: var(--space-2xs) var(--space-3xs);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav__link:hover {
+    color: var(--color-ink);
+  }
+
+  .nav__link.is-active {
+    color: var(--color-green);
+    border-bottom-color: var(--color-green);
+  }
+
+  /* ≥768px: single bar. */
+  @media (min-width: 768px) {
+    .nav__inner {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: "brand links call";
+      column-gap: var(--space-lg);
+    }
+
+    .nav__links {
+      justify-content: flex-end;
+      gap: var(--space-lg);
+    }
+
+    .nav__call {
+      justify-self: end;
+    }
+  }
+</style>
