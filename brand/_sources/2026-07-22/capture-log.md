@@ -174,3 +174,9 @@ These are raw sample outputs only — no interpretation of "brand primary color"
 ## .gitignore
 
 An existing `.gitignore` in the repo root already excluded `.superpowers/` (pre-existing, not created by this task). Added the four patterns specified in the brief (`node_modules/`, `dist/`, `.astro/`, `.DS_Store`) to that same file rather than overwriting it.
+
+## Logo palette re-sample (follow-up capture, code-review fix)
+
+| File | Source | Date | Method | Result |
+|---|---|---|---|---|
+| logo-palette-resample.md | assets/logo.jpg | 2026-07-22 | ImageMagick (`magick -colors 12 -unique-colors` whole-image; `magick -crop 236x264+0+0` then `-colors 7 -unique-colors` on the crop) | OK — re-ran the whole-image quantize and trees-only crop that Task 4's report described narratively but never wrote to this folder. Reproduced the report's claimed hex values exactly: `#372732`, `#5D6D4E`, `#B5B872`, `#EEF1EB` (whole-image) and `#3E2D36`, `#5C704A`, `#B0B471`, `#B9BB9C` (crop), on top of the `#B0B0A1` already logged above. See `logo-palette-resample.md` for full commands and raw output. |

@@ -8,7 +8,9 @@ no "close enough" hexes, no substituting a font because it renders faster.
 
 **Evidence base:** `brand/_sources/2026-07-22/` (immutable). Specifically
 `computed-styles.json` (live computed styles, `reliable: true` entries only),
-`capture-log.md` (ImageMagick logo samples), `assets/logo.jpg`,
+`capture-log.md` (ImageMagick logo samples), `logo-palette-resample.md`
+(follow-up ImageMagick logo samples, added after a code-review finding that
+the original narrative-only re-sample wasn't traceable), `assets/logo.jpg`,
 `assets/building.jpg`, the four screenshots, and the review-card images linked
 from `reviews-rendered.md`.
 
@@ -30,8 +32,11 @@ Read this before the token table; the tokens only make sense against it.
   light sage — over a hand-drawn ridgeline, beside a classical roman-caps
   wordmark. Sampled colors: `#5C704A` (mid tree), `#B0B471` (light tree),
   `#372732` (dark tree / wordmark), `#B0B0A1` (muted gray-tan), on a near-white
-  field `#EEF1EB`. `[OBSERVED]` — `capture-log.md` "Logo color samples" plus a
-  region-cropped re-sample of the same asset.
+  field `#EEF1EB`. `[OBSERVED]` — `#B0B0A1` is in `capture-log.md`'s "Logo
+  color samples"; `#5C704A`, `#B0B471`, `#372732` and `#EEF1EB` are in
+  `logo-palette-resample.md` (whole-image 12-color quantize and a region-cropped
+  re-sample of the same asset, both re-run and logged 2026-07-22 after the
+  original narrative-only version of this sample was flagged as unlogged).
 - **The live site already uses the logo's green as its action color.** The
   homepage hero band and the "Pay Here" / "Financing Options" buttons are
   `#596749` with white labels — within a hair of the logo's mid tree.
@@ -39,15 +44,20 @@ Read this before the token table; the tokens only make sense against it.
   `home-desktop.png` and `services-desktop.png`.
 - **The site's text color is the logo's dark tree.** h1, h2 and body all compute
   to `#372532`; the logo's darkest sample is `#372732`. Same color, two decimal
-  places apart. `[OBSERVED]` — `computed-styles.json` (h1/h2/body all
-  `reliable: true`).
+  places apart. `[OBSERVED]` — `#372532` from `computed-styles.json` (h1/h2/body
+  all `reliable: true`); `#372732` from `logo-palette-resample.md` (whole-image
+  quantize).
 - **The practice's own most deliberate design artifact is a serif.** The review
-  cards are 1080×1080 images: a transitional serif set in olive green `#5B694B`
-  on white, with oversized quote marks, centered, generously leaded, lots of
-  white space. Nobody makes thirteen of those by accident — this is the
-  practice's taste, expressed where Wix's template could not overrule it.
-  `[OBSERVED]` (the artifact) — image sampled from
-  `856d6c_f8a699b786684210ade3a46574cf5672~mv2.png`, listed in `products.md`.
+  cards are 1080×1080 images: a transitional serif set in an olive green read
+  as `#5B694B` on white, with oversized quote marks, centered, generously
+  leaded, lots of white space. Nobody makes thirteen of those by accident —
+  this is the practice's taste, expressed where Wix's template could not
+  overrule it. `[OBSERVED]` (the artifact's existence, layout and serif style —
+  image referenced by URL in `reviews-rendered.md`, listed in `products.md`) /
+  `[INFERRED]` (the specific hex `#5B694B`, and that the aesthetic is the
+  practice's taste rather than a widget vendor's template — the source image
+  was never downloaded into `_sources/` or sampled with a tool, so no logged
+  evidence file backs this reading; see `visual_decisions.md` I9, I10).
 - **The Wix template's typography is not a brand choice.** Headings compute to
   Barlow at 72px, body to a licensed Avenir cut at 15px, nav at 14px `#6C6869`.
   72px headings over 15px body is a template default, not a designed
@@ -75,15 +85,15 @@ until the practice says otherwise.
 
 | Token | Value | Status | What it is |
 |---|---|---|---|
-| `--color-ink` | `#372532` | `[OBSERVED]` | Primary text. The live site's computed h1/h2/body color; the logo's dark tree is `#372732`. |
+| `--color-ink` | `#372532` | `[OBSERVED]` | Primary text. The live site's computed h1/h2/body color (`computed-styles.json`, h1/h2/body all `reliable: true`); the logo's dark tree is `#372732` (`logo-palette-resample.md`, whole-image quantize). |
 | `--color-ink-muted` | `#6C6869` | `[OBSERVED]` | Secondary text (meta, captions, nav-inactive). The live site's computed nav-label color. Passes AA unmodified — no adjustment needed. |
-| `--color-green` | `#596749` | `[OBSERVED]` | Brand primary / action color. The live site's CTA button background; the logo's mid tree is `#5C704A` and the review cards' text is `#5B694B` — one color, three samples. |
+| `--color-green` | `#596749` | `[OBSERVED]` | Brand primary / action color. The live site's CTA button background (`computed-styles.json`) is the token value itself; the logo's mid tree is `#5C704A` (`[OBSERVED]`, `logo-palette-resample.md`) and the review cards' text reads as a close olive match (`[INFERRED]`, ~`#5B694B`, never sampled to a logged file) — one color, corroborated by two further readings. |
 | `--color-green-deep` | `#4C5840` | `[PROPOSED]` | Hover/active state for green surfaces, and green text where extra headroom is wanted. Same hue, darkened. |
-| `--color-sage` | `#B0B471` | `[OBSERVED]` | The logo's light tree. **Decorative only** — 2.18:1 on white, fails AA for any text. Use for rules, icons-on-dark, quote marks on ink. |
+| `--color-sage` | `#B0B471` | `[OBSERVED]` | The logo's light tree (`logo-palette-resample.md`, trees-only crop). **Decorative only** — 2.18:1 on white, fails AA for any text. Use for rules, icons-on-dark, quote marks on ink. |
 | `--color-sage-text` | `#6F7338` | `[PROPOSED]` | Accessible variant of the sage hue, for the rare case sage must carry text on a light surface. Hue preserved, lightness dropped until AA passes. |
-| `--color-stone` | `#B0B0A1` | `[OBSERVED]` | The logo's muted gray-tan. **Non-text only** — 2.19:1 on white. Photo mattes, dividers on dark. |
+| `--color-stone` | `#B0B0A1` | `[OBSERVED]` | The logo's muted gray-tan (`capture-log.md`, "Logo color samples"). **Non-text only** — 2.19:1 on white. Photo mattes, dividers on dark. |
 | `--color-border` | `#D9DCD2` | `[PROPOSED]` | Hairline rules and card edges. Lightened from stone. **Decorative boundaries only** — 1.39:1 on white; any boundary that carries meaning (focus, error, control edge) must use `--color-ink-muted` or `--color-green`. |
-| `--color-paper` | `#F2F4EE` | `[PROPOSED]` | Alternating section surface. Derived from the logo's own off-white field (`#EEF1EB`), lifted slightly so text keeps headroom. |
+| `--color-paper` | `#F2F4EE` | `[PROPOSED]` | Alternating section surface. Derived from the logo's own off-white field (`#EEF1EB`, `[OBSERVED]` in `logo-palette-resample.md`), lifted slightly so text keeps headroom. |
 | `--color-surface` | `#FFFFFF` | `[OBSERVED]` | Default page background. The live site's, and the review cards'. |
 
 There is deliberately **no** blue, no teal, no clinical mint. The practice's
@@ -146,7 +156,7 @@ each.
 serif on the practice's review cards — moderate stroke contrast, sturdy
 bracketed serifs, large x-height, brushed curves. The exact face on those cards
 cannot be identified: they are flattened PNGs with no font metadata, so this is
-a visual match, not a confirmed identification. `[PROPOSED]`
+a visual match, not a confirmed identification. `[INFERRED]`
 
 **Barlow** (SIL OFL, Jeremy Tribby) is the practice's *actual current heading
 font* per `computed-styles.json` — and it happens to be open-licensed, so it is

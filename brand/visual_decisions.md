@@ -195,6 +195,7 @@ stated. All are `[PROPOSED]`.
 | I7 | Decorative effects (gradients, glass, ambient motion) are off-brand. | The register of every controlled artifact is quiet and flat. | Low, and cheap to revisit. |
 | I8 | The specific open serif named in `visual.md` is the nearest match to the review cards' face. | Visual comparison only — the cards are flattened images with no font metadata. | Low. If the practice knows the real face and it is licensable, swap the token. |
 | I9 | The reviewer-card aesthetic represents the practice's taste rather than a widget vendor's template. | Consistent across all thirteen assets, and distinct from the Wix site around it. | Moderate. If a vendor made them, the serif direction loses its strongest evidence. **Worth asking the practice directly.** |
+| I10 | The review cards' text color is close to the brand green, read as `#5B694B`. | A visual read of the review-card image referenced by URL in `reviews-rendered.md`. That image was never downloaded into `_sources/` and no tool-based color sample of it exists in any evidence file — unlike the logo's greens (`#5C704A`, `#B0B471`), which are now backed by `logo-palette-resample.md`. | Low. `#5B694B` is only cited as one of two corroborating readings for `--color-green` (`#596749`), which is independently `[OBSERVED]` from `computed-styles.json` and does not depend on this claim. If the true hex differs, only the "three samples agree" narrative weakens, not the shipped token. Fixable by downloading the source image and sampling it with the same tool used for the logo. |
 
 ---
 
@@ -207,6 +208,15 @@ Honest section: these are in `visual.md` and are **not** strategy.
 - The alternate-surface tint existing at all — `[CONSTRUCTION]`, sections needed
   separating without rules or boxes.
 - The specific breakpoint at which section rhythm loosens — `[CONSTRUCTION]`.
+- `--container: 1120px` and `--gutter` — `[CONSTRUCTION]`. Neither traces to
+  any brand evidence; they exist because Task 9's page build needs a max
+  content width and a gutter, and this is what three pages' content needed.
+  Kept in `visual.md` because the build genuinely requires them, not because
+  the evidence base implies them.
+- The 44×44px minimum tap-target rule — `[CONSTRUCTION]`. It is not derived
+  from the logo, the building, or any capture — it exists to satisfy the
+  spec's accessibility contract (WCAG 2.5.5-style target-size guidance) for an
+  older patient base. Kept for that reason, not as a brand-evidence finding.
 - Capping the palette, the weights, and the elevation count — `[PREFERENCE]`
   (restraint as taste, not as evidence).
 - The choice of one radius over zero radius — `[PREFERENCE]`. A zero-radius
