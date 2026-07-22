@@ -159,3 +159,7 @@ Carry forward; do not let these silently become rules.
    an existing tagline, staff-authored copy guidelines). Everything here is
    reverse-engineered from a live Wix site; one question could replace a lot of
    inference.
+
+## Owner checkpoint — 2026-07-22
+
+Project lead reviewed the inferred-claim register (V1–V9) at the Task 7 gut-check. Voice lean **confirmed to build on**: "Steadying / plain-spoken / named-people," answering anxiety rather than selling (V1). Scope is plausibility/direction only; V1–V9 remain tagged hypotheses until the practice ratifies. V2 (published prices as deliberate transparency stance vs. template accident) is flagged to ask the practice directly at pitch time; the pitch proceeds either way.

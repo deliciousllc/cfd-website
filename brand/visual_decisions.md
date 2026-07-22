@@ -250,3 +250,7 @@ Carry these forward; do not let them silently become rules.
    (print collateral, signage specs, an original logo file with real color
    values). Everything here is reverse-engineered from a live Wix site and
    compressed images. One question could replace a lot of inference.
+
+## Owner checkpoint — 2026-07-22
+
+Project lead reviewed the inferred-claim register (I1–I10) at the Task 7 gut-check. Direction **confirmed to build on**: the Pacific-Northwest evergreen thesis (I3) is a sound basis for the redesign — keep the practice's greens, serif display face, and building photo as anchors, replace the Wix template. Scope of this confirmation is plausibility/direction only; I1–I10 remain tagged hypotheses until the practice itself ratifies. I9 (review-card serif = practice taste vs. widget-vendor template) and the parallel voice V2 (published prices as deliberate stance) are flagged to ask the practice directly at pitch time — the pitch proceeds either way.
