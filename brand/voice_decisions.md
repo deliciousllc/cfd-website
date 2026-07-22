@@ -120,13 +120,15 @@ the Task 7 checkpoint. All `[PROPOSED]`.
 | V5 | A cold/clinical register is off-voice. | Whole evidence base is warm; mirrors visual `I6` (no medical blue). | Low, and cheap to revisit. |
 | V6 | The measured-copy / effusive-review split is intentional and should be preserved. | Consistent across all captured pages vs. all 12 reviews. | Low. Even if unintentional, borrowing praise from patients is the safer way to be warm. |
 | V7 | The `/fillings-and-crowns` first-person-singular is an error, not a deliberate single-author page. | Every other page uses "we"; practice has three dentists. | Low. If deliberate, the practice says so and we keep that one page's voice. |
+| V8 | "No fabricated warmth" is a correct anti-pattern: warmth may only be shown by accurately surfacing patients' own words, never by writing new sentiment in the practice's voice. | Same measured-copy/effusive-review split as V6 (Rules 8–9) — every captured page of the practice's own copy is factual and unembellished; all effusive language in the evidence base comes from patients, none from the practice. | Low–moderate. If the practice actually wants the pitch pages to carry some warmer editorial voice of their own (not just borrowed from patients), this guardrail over-constrains copy toward the clinical side — recoverable by loosening the anti-pattern, not by rewriting Rules 8/9. |
+| V9 | The page-tiering principle — one brand-level constant plus one distinct job per page (Home / Services & Pricing / Financing) — is the right way to structure the three-page pitch. | Derived from the brand-level synthesis (personality words + Rules 1, 2, 3, 7) applied to the three-page scope set in the brief; the specific one-constant/one-job-each split is an editorial-architecture read, not something the practice stated. | Low. The brand-level constant is independently well-evidenced; if the practice or later tasks want different page jobs or overlapping responsibilities, only the page-level rows need recutting. |
 
 ---
 
 ## Values classified as construction or preference
 
-- **Rule 10's exact wording of the rewrite/never-change split** — `[CONSTRUCTION]`.
-  The *need* for the line comes from the brief; the specific phrasing is ours.
+- **Rule 10 (rewrite-vs-never-change contract)** — `[CONSTRUCTION]`. Reasoning
+  stated once, above under "Key choices."
 - **Capping at ten rules** — `[PREFERENCE]`. Restraint as taste; the guide says
   "≤10" and fewer, sharper rules beat more, softer ones.
 - **Choosing three personality words rather than two or four** — `[PREFERENCE]`.

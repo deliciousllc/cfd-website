@@ -11,7 +11,10 @@ not a generic dental template.
 Every claim is tagged `[OBSERVED]` (directly evidenced in the practice's own
 copy or reviews) or `[INFERRED]` (an analytical read). Every `[INFERRED]` claim
 is also logged in `voice_decisions.md` as `[PROPOSED]` — only the practice can
-ratify an inference.
+ratify an inference. A rule may instead be tagged `[CONSTRUCTION]`: the
+project's own editorial contract, not a claim about how the practice sounds —
+those are explained in `voice_decisions.md` but do not enter the
+inferred-claims checkpoint register.
 
 ---
 
@@ -74,7 +77,8 @@ Each word carries a specific in-practice meaning, not its dictionary meaning.
 
 ## Rules (10)
 
-Each rule cites the source it was extracted from, or is marked `[INFERRED]`.
+Each rule cites the source it was extracted from, or is marked `[INFERRED]` or
+`[CONSTRUCTION]`.
 
 1. **Doctors and staff are named people, never "our team."** `[OBSERVED]` —
    About page bios everyone by name; routine-care names all three doctors;
@@ -124,12 +128,13 @@ Each rule cites the source it was extracted from, or is marked `[INFERRED]`.
    calm and factual. Keep that division — the practice states, patients gush —
    rather than manufacturing warmth in the practice's own voice.
 
-10. **Rewrite freely; never re-fact.** `[INFERRED]` (construction — see
-    Decisions) — Phrasing, grammar, structure, first-person→"we", and the
-    site's genuine typos *may and should* be fixed. A **fact, price, name,
-    credential, or patient quote may never change** — those come from
-    `products.md` verbatim, and patient quotes keep their original typos. The
-    line: rewrite *how it reads*, never *what it asserts*.
+10. **Rewrite freely; never re-fact.** `[CONSTRUCTION]` (the project's own
+    editorial contract, not a claim about the practice — see Decisions) —
+    Phrasing, grammar, structure, first-person→"we", and the site's genuine
+    typos *may and should* be fixed. A **fact, price, name, credential, or
+    patient quote may never change** — those come from `products.md`
+    verbatim, and patient quotes keep their original typos. The line: rewrite
+    *how it reads*, never *what it asserts*.
 
 ---
 
