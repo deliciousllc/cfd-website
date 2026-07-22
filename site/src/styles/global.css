@@ -6,38 +6,9 @@
    ========================================================================== */
 
 /* --- Self-hosted fonts (no CDN — deploys to GitHub Pages, must be self-contained).
-   Paths are base-path-aware via the deployed /cfd-website/fonts/ prefix; global.css
-   lives under public-resolved URLs so relative ../../fonts is wrong — use the
-   BASE_URL-prefixed absolute path baked at build by Astro's asset handling below.
-   CSS cannot read import.meta.env, so these are written with the base path prefix. */
-@font-face {
-  font-family: "Barlow";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/cfd-website/fonts/barlow-400.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Barlow";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("/cfd-website/fonts/barlow-600.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Lora";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/cfd-website/fonts/lora-400.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Lora";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("/cfd-website/fonts/lora-600.woff2") format("woff2");
-}
+   The @font-face declarations live in BaseLayout.astro's global <style> block, not
+   here, because CSS cannot read import.meta.env — only Astro's frontmatter can build
+   the BASE_URL-prefixed path. See BaseLayout.astro. */
 
 /* --- Design tokens (verbatim from brand/visual.md) --------------------------- */
 :root {
@@ -53,9 +24,14 @@
   --color-paper: #F2F4EE;
   --color-surface: #FFFFFF;
 
-  /* Brief-named aliases (Task 9 interface contract) */
+  /* Brief-named aliases (Task 9 interface contract)
+     --color-accent points to --color-green (AA-safe, 6.07:1 on white), NOT
+     --color-sage. Sage is decorative-only (2.18:1, fails AA for text) — a
+     token literally named "accent" has to be safe for text/links/headings or
+     it's a footgun for Tasks 10-12 authors. Use --color-sage directly (never
+     --color-accent) for decorative-only accents like rules or icons. */
   --color-primary: var(--color-green);
-  --color-accent: var(--color-sage);
+  --color-accent: var(--color-green);
   --color-text: var(--color-ink);
   --color-bg: var(--color-surface);
 

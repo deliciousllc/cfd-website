@@ -14,7 +14,13 @@ const { title, description } = Astro.props;
 
 // Base-aware favicon path.
 const base = import.meta.env.BASE_URL;
-const favicon = (base.endsWith("/") ? base : base + "/") + "favicon.svg";
+const baseNormalized = base.endsWith("/") ? base : base + "/";
+const favicon = baseNormalized + "favicon.svg";
+
+// Base-aware font paths. CSS can't read import.meta.env, so the @font-face
+// declarations are built here (frontmatter can) and injected as a global
+// style block below, rather than hardcoded in global.css.
+const fontsBase = baseNormalized + "fonts/";
 ---
 
 <!doctype html>
@@ -25,6 +31,36 @@ const favicon = (base.endsWith("/") ? base : base + "/") + "favicon.svg";
     <meta name="description" content={description} />
     <link rel="icon" href={favicon} />
     <title>{title}</title>
+    <style is:global set:html={`
+      @font-face {
+        font-family: "Barlow";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("${fontsBase}barlow-400.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Barlow";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("${fontsBase}barlow-600.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Lora";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("${fontsBase}lora-400.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Lora";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("${fontsBase}lora-600.woff2") format("woff2");
+      }
+    `} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
