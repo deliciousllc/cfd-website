@@ -109,7 +109,7 @@ Blog, awareness/content family, booking-system integration, the long tail of ind
 
 0. **Gate: external review complete and adjudicated.** No step below starts until the Codex review's findings are resolved or explicitly accepted in the Review Log, and the implementation plan is written and reviewed.
 1. Phase 1 evidence gathering (scrapes, screenshots, computed styles, logo, service inventory map).
-2. Phase 1 brand files (visual → voice → products → handoffs → `_START_HERE.md` → root `CLAUDE.md`).
+2. Phase 1 brand files (products → visual → voice, each family's decisions + handoff bundled with its driver → `_START_HERE.md` → root `CLAUDE.md`). *Amended 2026-07-22 during plan review: products.md comes first because voice/visual examples cite its facts; bundling keeps each family's task self-contained.*
 3. User gut-checks the `[PROPOSED]`/`[INFERRED]` items in the decisions files. **Scope of this check:** plausibility and presentation only — the user is not the validator of brand inferences. `[INFERRED]` items remain tagged hypotheses in the brand files even after this check; the practice owners are the only party who can ratify them, which happens (if ever) at or after the pitch.
 4. Phase 2 Astro scaffold + pages, built against the brand files.
 5. Pages deploy + browser verification (including the accessibility contract).
@@ -121,7 +121,8 @@ Blog, awareness/content family, booking-system integration, the long tail of ind
 | Date | Reviewer | Outcome |
 |---|---|---|
 | 2026-07-22 | Josh + Claude (Fable 5), design session | Design approved (scope B, lean brand subset, Astro + public GitHub Pages) |
-| 2026-07-22 | Codex (external) | 12 P1 findings. 8 resolved in spec (see below); 4 escalated to owner for decision |
+| 2026-07-22 | Codex (external) | Spec review: 12 P1 findings. 8 resolved in spec (see below); 4 escalated to owner for decision |
+| 2026-07-22 | Codex (external) | Plan review (`architecture/plans/2026-07-22-cfd-website-implementation.md`): 12 findings (5 P1, 6 P2, 1 P3), all accepted and fixed in the plan; one spec amendment (brand-file build order: products first, families bundled) |
 
 ## Review findings — resolved in spec (2026-07-22)
 

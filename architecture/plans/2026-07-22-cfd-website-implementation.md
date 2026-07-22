@@ -20,7 +20,7 @@
 - All internal links/assets respect the `/cfd-website` base path.
 - Mobile-first, plain CSS, no UI framework, no client-side JS unless a component demands it (none is expected to).
 - `brand/_sources/` files are dated and immutable once committed — new research = new dated file.
-- Commit at the end of every task. Commit messages end with `Co-Authored-By:` line per harness rules.
+- Commit at the end of every task. **Every commit message ends with the trailer `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>` — the example `git commit` commands in this plan omit it for brevity; the implementer MUST append it to each one.**
 - Known facts already captured (from 2026-07-22 homepage scrape, re-verify in Task 1): doctors are Dr. Eve Rutherford DDS, Dr. Rachel Greene DDS, Dr. Samiksha Gulrajani DMD; address 133 Maple Ave Snohomish WA 98290; phone 360-568-6017; email info@cfdentistrysnohomish.com; Instagram @cfdentistrysnoho; Facebook /CFDsnohomish; bill pay https://bestcardteam.com/Payments/?Profile=centennialfamPAY.
 
 ---
@@ -35,13 +35,17 @@
 **Interfaces:**
 - Produces: dated raw evidence that Tasks 2–6 cite by filename; `capture-log.md` lists every capture with URL + date + method.
 
-- [ ] **Step 1: Create `.gitignore`**
+- [ ] **Step 1: Create `.gitignore` and the evidence directories**
 
 ```gitignore
 node_modules/
 dist/
 .astro/
 .DS_Store
+```
+
+```bash
+mkdir -p brand/_sources/2026-07-22/assets
 ```
 
 - [ ] **Step 2: Scrape key pages with Firecrawl CLI**
@@ -68,7 +72,15 @@ Expected: each file non-empty; verify with `wc -l brand/_sources/2026-07-22/*.md
 
 - [ ] **Step 3: Screenshots at desktop and mobile widths**
 
-Using browser tools: navigate to the homepage, `resize_window` to desktop preset (1280×800), take `screenshot`, save/export to `brand/_sources/2026-07-22/home-desktop.png`. Repeat with mobile preset (375×812) → `home-mobile.png`. Repeat both widths for `/services-and-pricing` → `services-desktop.png`, `services-mobile.png`. (If the browser pane cannot export PNG files directly, use the Firecrawl screenshot format: `firecrawl scrape "<url>" --format screenshot` and save the result.)
+Using browser tools: navigate to the homepage, `resize_window` to desktop preset (1280×800), take `screenshot`, save/export to `brand/_sources/2026-07-22/home-desktop.png`. Repeat with mobile preset (375×812) → `home-mobile.png`. Repeat both widths for `/services-and-pricing` → `services-desktop.png`, `services-mobile.png`.
+
+Fallback if the browser pane cannot export PNG files: for each page,
+
+```bash
+firecrawl scrape "<url>" --format screenshot -o /tmp/shot.json
+```
+
+then extract the screenshot URL from the JSON (`python3 -c "import json;print(json.load(open('/tmp/shot.json'))['screenshot'])"` — adjust the key to what the JSON actually contains) and download it: `curl -sL "<screenshot-url>" -o brand/_sources/2026-07-22/<name>.png`. Verify each PNG is non-empty and actually opens (`file *.png`). Note in `capture-log.md` that fallback screenshots are desktop-width only, if so.
 
 - [ ] **Step 4: Extract computed styles from the rendered homepage**
 
@@ -124,18 +136,39 @@ git add -A && git commit -m "Add dated brand evidence sources from live site"
 - Consumes: Task 1 scrapes (nav link list in `home.json`).
 - Produces: the authoritative source-page → destination-section map used by Tasks 3 and 10–12. No ad-hoc grouping decisions later.
 
-- [ ] **Step 1: Enumerate every nav item from the homepage scrape**
+- [ ] **Step 1: Enumerate every nav item from the homepage scrape AND the rendered nav**
 
-From `home.json` links, list all ~20 nav items with their URLs, including duplicates (Sleep apnea appears twice) and junk slugs (`blank-page`, `blank-page-1`, `copy-of-*`).
+From `home.json` links, list all ~20 nav items with their URLs, including duplicates (Sleep apnea appears twice) and junk slugs (`blank-page`, `blank-page-1`, `copy-of-*`). Then cross-check against the rendered site: open the live homepage in the browser, `read_page`, and enumerate the nav menu (including anything under "More") — the link dump alone may include footer/incidental links or miss client-rendered entries. The **union** of both lists, deduplicated by URL, is the inventory. Note any discrepancy between the two sources in the inventory file.
 
 - [ ] **Step 2: Map each item to exactly one destination**
 
-Table columns: source item · source URL · destination (page + section) · notes. Required destinations (from spec): Services & Pricing groups **Routine care** (Routine Cleanings and Exams), **Restorative** (Fillings and Crowns), **Cosmetic** (Cosmetic Dentistry, Teeth Whitening, Invisalign, Botox and Fillers/Botox — merge the two Botox entries), **Sleep & TMJ** (Sleep Apnea ×2 merged, TMJ), **Technology & extras** (Laser Dentistry, 3D Printing, Willo Toothbrush, Kids' Days). Financing → section on Services & Pricing. About Us + Reviews → About page (reviews also excerpted on Home). Blog → omitted, reason: out of scope per spec. Duplicate/junk slugs → merged/omitted with reason. Every source item must appear exactly once as mapped or omitted-with-reason.
+Table columns: source item · source URL · destination (page + section) · notes. Required destinations (from spec): Services & Pricing groups with **these locked names and anchor IDs** (Tasks 10–11 use them verbatim):
 
-- [ ] **Step 3: Commit**
+| Group name | Anchor ID | Members |
+|---|---|---|
+| Routine care | `#routine-care` | Routine Cleanings and Exams |
+| Restorative | `#restorative` | Fillings and Crowns |
+| Cosmetic | `#cosmetic` | Cosmetic Dentistry, Teeth Whitening, Invisalign, Botox and Fillers/Botox (merge the two Botox entries) |
+| Sleep & TMJ | `#sleep-tmj` | Sleep Apnea (×2, merged), TMJ |
+| Technology & extras | `#technology-extras` | Laser Dentistry, 3D Printing, Willo Toothbrush, Kids' Days |
+| Financing | `#financing` | Financing page content |
+
+(The spec's shorthand for the last group was "extras"; "Technology & extras" is the display name — recorded here as the authoritative rename.) About Us + Reviews → About page (reviews also excerpted on Home). Blog → omitted, reason: out of scope per spec. Duplicate/junk slugs → merged/omitted with reason. Every source item must appear exactly once as mapped or omitted-with-reason.
+
+- [ ] **Step 3: Scrape any mapped source page not yet captured**
+
+Compare the inventory's mapped URLs against `brand/_sources/2026-07-22/`. For every mapped service page not scraped in Task 1 (e.g., fillings-and-crowns, cosmetic-dentistry, the sleep apnea pages, TMJ, Invisalign, teeth whitening, Willo, Kids' Days, Botox), run:
 
 ```bash
-git add -A && git commit -m "Add service inventory map: every source page mapped or omitted with reason"
+firecrawl scrape "<url>" --only-main-content -o brand/_sources/2026-07-22/<slug>.md
+```
+
+Add each to `capture-log.md`. Task 3's "every service and price verbatim" contract depends on this being complete — a mapped page with no scrape is a plan violation.
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add -A && git commit -m "Add service inventory map and complete source-page scrapes"
 ```
 
 ---
@@ -190,7 +223,10 @@ exclude it — never reconstruct.)
 
 - [ ] **Step 2: Verify no fact lacks provenance**
 
-Run: `grep -n "captured 2026-07-22" brand/products.md | wc -l` — spot-check that every fact-bearing line has a citation; fix any that don't.
+Formatting contract for this file: every fact is a `- ` bullet ending with its `(source: …, captured 2026-07-22)` citation; prose lines carry no facts. Then the check is mechanical:
+
+Run: `grep -nE '^- ' brand/products.md | grep -v 'source:'`
+Expected: zero output. Any line it prints is a fact bullet missing provenance — fix it. Then read the non-bullet prose once to confirm no fact snuck into prose form.
 
 - [ ] **Step 3: Commit**
 
@@ -321,7 +357,13 @@ git add -A && git commit -m "Add brand system entry points and project CLAUDE.md
 
 ### Task 7: CHECKPOINT — owner gut-check (not a subagent task)
 
-- [ ] Present Josh every `[PROPOSED]`/`[INFERRED]` item from `visual_decisions.md` and `voice_decisions.md`, grouped, with one-line rationale each. Scope per spec: plausibility and presentation only — items stay tagged as hypotheses regardless; the practice is the only ratifier. Apply any corrections to the brand files (same session, per hard rules) before starting Task 8.
+- [ ] **Step 1:** Present Josh every `[PROPOSED]`/`[INFERRED]` item from `visual_decisions.md` and `voice_decisions.md`, grouped, with one-line rationale each. Scope per spec: plausibility and presentation only — items stay tagged as hypotheses regardless; the practice is the only ratifier. Apply any corrections to the brand files (same session, per hard rules) before starting Task 8.
+
+- [ ] **Step 2: Commit the checkpoint outcome** (even if no corrections: amend the decisions files' State of play noting the check happened)
+
+```bash
+git add -A && git commit -m "Owner gut-check of inferred brand items: corrections applied" && git push
+```
 
 ---
 
@@ -409,7 +451,7 @@ CSS reset (box-sizing, margin 0), custom properties from `brand/visual.md` token
 
 - [ ] **Step 2: Write `Nav.astro` and `Footer.astro`**
 
-Nav per the locked spec above. Footer: hours (verbatim from products.md), address, phone (tel: link), email, Instagram + Facebook links, bill-pay link — all from `brand/products.md`. Footer includes a small pitch disclaimer: "Concept redesign by Delicious LLC — not the practice's official site." (Required: this is spec work; the site must not impersonate the practice's official presence.)
+Nav per the locked spec above. **Active-page interface:** `Nav.astro` derives the current route itself from `Astro.url.pathname` — no prop from BaseLayout. Normalize before comparing: strip the `import.meta.env.BASE_URL` prefix and any trailing slash, giving `''` (home), `'services'`, or `'about'`; each nav link whose route matches gets `aria-current="page"` plus the active visual treatment. Footer: hours (verbatim from products.md), address, phone (tel: link), email, Instagram + Facebook links, bill-pay link — all from `brand/products.md`. Footer includes a small pitch disclaimer: "Concept redesign by Delicious LLC — not the practice's official site." (Required: this is spec work; the site must not impersonate the practice's official presence.)
 
 - [ ] **Step 3: Write `BaseLayout.astro`**
 
@@ -421,7 +463,7 @@ Copy logo + selected photos into `site/public/images/` (ImageMagick: resize to m
 
 - [ ] **Step 5: Update `index.astro` to use BaseLayout, verify in browser**
 
-Wrap placeholder content. Dev server: confirm nav/footer render at 375px and 1280px, keyboard-tab through nav shows focus, skip link appears on first Tab.
+Wrap placeholder content. Dev server: confirm nav/footer render at 375px and 1280px, keyboard-tab through nav shows focus, skip link appears on first Tab. (Active-state verification across all three routes happens in Task 13 once all pages exist; for now confirm Home shows `aria-current="page"` on the Home link.)
 
 - [ ] **Step 6: Commit**
 
@@ -513,7 +555,15 @@ For every token text/background pair actually used, verify AA (4.5:1 normal, 3:1
 
 - [ ] **Step 2: Structure + alt-text audit**
 
-On each built page in `site/dist/` (run `npm run build`): exactly one `h1`; no skipped heading levels; `<header>/<nav>/<main>/<footer>` landmarks present; every `<img>` has meaningful alt or `alt=""` if decorative. `grep -c "<img" site/dist/**/*.html` vs `grep -c 'alt='` as a smoke check, then eyeball each.
+On each built page in `site/dist/` (run `npm run build`): exactly one `h1`; no skipped heading levels; `<header>/<nav>/<main>/<footer>` landmarks present; every `<img>` has meaningful alt or `alt=""` if decorative. Mechanical check for missing alt attributes (flatten first so multiline tags can't evade it):
+
+```bash
+for f in $(find site/dist -name '*.html'); do tr '\n' ' ' < "$f" | grep -oE '<img[^>]*>' | grep -v 'alt='; done
+```
+
+Expected: zero output — any printed `<img>` tag lacks an alt attribute. This only proves presence; read each page's alt texts yourself to confirm they're meaningful (not filenames or "image").
+
+Also verify the nav active state here: visit all three routes in `npm run preview`; each page's own nav link (and only it) carries `aria-current="page"` with the visible active treatment.
 
 - [ ] **Step 3: Keyboard + zoom pass in the browser**
 
@@ -594,9 +644,10 @@ Open `https://deliciousllc.github.io/cfd-website/` — all three pages render, i
 ### Task 15: Wrap-up
 
 - [ ] **Step 1: Re-verify facts against the live source site** — spot-check prices/hours/phone on cfdentistrysnohomish.com against `products.md`; any drift → fix products.md + affected pages, add a gotcha rule.
-- [ ] **Step 2: Update spec status** to "Implemented — live at https://deliciousllc.github.io/cfd-website/"; fresh State of play in both handoffs; README live-URL check.
-- [ ] **Step 3: Final whole-branch review** (per SDD practice: per-task reviews miss cross-task bugs) — one reviewer pass over the full diff `git diff <first-commit>..HEAD` against spec + this plan.
-- [ ] **Step 4: Commit and push**
+- [ ] **Step 2: If Step 1 changed any site file: redeploy and re-verify.** Commit + push the fixes, then `gh run watch --exit-status`, then re-check the live URL in the browser at 375px and 1280px (all changed pages). The delivered URL must be the version that passed verification — never push a fact fix and walk away.
+- [ ] **Step 3: Update spec status** to "Implemented — live at https://deliciousllc.github.io/cfd-website/"; fresh State of play in both handoffs; README live-URL check.
+- [ ] **Step 4: Final whole-branch review** (per SDD practice: per-task reviews miss cross-task bugs) — one reviewer pass over the full diff `git diff <first-commit>..HEAD` against spec + this plan. Findings adjudicated before close.
+- [ ] **Step 5: Commit and push**
 
 ```bash
 git add -A && git commit -m "Wrap up: verify facts, update spec status" && git push
