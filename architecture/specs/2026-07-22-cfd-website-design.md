@@ -1,7 +1,7 @@
 # CFD Website — Redesign Pitch Design
 
 **Date:** 2026-07-22
-**Status:** Approved in design session; awaiting external review
+**Status:** Approved — external review (Codex) adjudicated 2026-07-22; cleared for implementation planning
 **Project:** `cfd-website` — spec-work redesign pitch for Centennial Family Dentistry (Snohomish, WA)
 
 ---
@@ -134,7 +134,16 @@ Blog, awareness/content family, booking-system integration, the long tail of ind
 - **Pages deployment prerequisites are unspecified** (feasibility, conf 75) → **Resolved:** one-time Pages setup (Actions source, `pages: write` + `id-token: write`) is part of the deploy task; task not done until the live URL renders.
 - **Accessibility has no implementation contract** (design-lens, conf 75) → **Resolved:** testable accessibility contract added to Deployment & verification; promoted to success criterion 5.
 
-## Deferred / Open Questions — escalated to owner
+## Review findings — escalated and decided by owner (2026-07-22)
+
+All four escalated findings were decided by the owner on 2026-07-22:
+
+1. **Public launch risk** → **Keep public as decided.** Risk accepted with the asset-republication angle on the table: discoverability is negligible and the assets are already public on the practice's own site. Re-open if the practice objects.
+2. **Brand system weight** → **Keep the lean 8-file build.** The extraction evidence is needed for the site anyway, and the brand system doubles as proof-of-process in the pitch.
+3. **Owner needs unvalidated** → **Accepted as a known risk.** Inherent to unsolicited spec work; the site is the conversation starter.
+4. **Sales outcome missing from criteria** → **Deferred until the site exists.** Pitch collateral (e.g., before/after comparison) is a possible follow-on, decided after there's something to compare.
+
+### Original findings (for the record)
 
 - **Public launch may undermine prospect trust** — Repo & project structure (P1, product-lens + adversarial, confidence 100)
 
