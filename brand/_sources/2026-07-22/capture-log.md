@@ -11,7 +11,8 @@ This is a raw-evidence capture — no interpretation, no improvised facts.
 | about-us.md | /about-us | 2026-07-22 | firecrawl scrape | OK — 226 lines, 13,073 bytes |
 | services-and-pricing.md | /services-and-pricing | 2026-07-22 | firecrawl scrape | OK — 36 lines, 500 bytes |
 | financing.md | /financing | 2026-07-22 | firecrawl scrape | OK — 20 lines, 1,450 bytes |
-| reviews.md | /about-me | 2026-07-22 | firecrawl scrape | OK — 18 lines, 1,301 bytes. Page is a "Check out our reviews" widget page — it embeds a Google-reviews carousel image gallery and a link out to Google Search reviews; it does not contain scrapable review text on the page itself. Captured as-is under the filename the brief specified (`reviews.md`), sourced from `/about-me`. |
+| reviews.md | /about-me | 2026-07-22 | firecrawl scrape | OK — 18 lines, 1,301 bytes. Page is a "Check out our reviews" widget page whose markdown/DOM text extraction has no review quotes (see `reviews-rendered.md` below for the actual review text, extracted by reading the widget's rendered image cards directly). |
+| reviews-rendered.md | /about-me | 2026-07-22 | browser (lightbox screenshots, read directly) | OK — 6,926 bytes. 12 unique verbatim review quotes with reviewer name, transcribed by reading the widget's fullscreen lightbox slides (each slide is a 1080×1080 image with the quote baked in as text). See "Rendered reviews" section below for method detail. |
 | routine-cleanings-and-exams.md | /routine-cleanings-and-exams | 2026-07-22 | firecrawl scrape | OK — 24 lines, 1,073 bytes |
 | laser.md | /laser | 2026-07-22 | firecrawl scrape | OK — 22 lines, 531 bytes |
 | 3d-printing.md | /3d-printing | 2026-07-22 | firecrawl scrape | OK — 14 lines, 870 bytes |
@@ -19,22 +20,67 @@ This is a raw-evidence capture — no interpretation, no improvised facts.
 
 No page 404'd or scraped empty. All 8 requested captures returned real page content confirmed by manual read-through (not error/placeholder pages).
 
+## Rendered reviews (reviews-rendered.md, corrected)
+
+The `/about-me` page's review quotes are not DOM text — the widget displays
+each review as a 1080×1080 image with the quote and reviewer name baked in
+as pixels (serif font, olive-green quote marks, white background), one at a
+time in a carousel with a "1/13" counter. `get_page_text`/`read_page`
+correctly return nothing usable here since there is no text node to read.
+
+Method that worked: clicking a slide opens the widget's own fullscreen
+lightbox. `read_page` on the resulting DOM found accessible `"next"` /
+`"previous"` / `"close"` buttons (living in a shadow-root gallery component
+not reachable by plain `document.querySelector`). Paging through with the
+`"next"` button (ref-based `computer` clicks, 2–6s wait per slide for the
+crossfade to finish) rendered each slide at full quality and legible, and
+each was read directly off the screenshot — this is a direct transcription
+of real, site-published content, not a fabrication.
+
+All 13 slide positions were paged through. Slide 13 turned out to be an
+exact duplicate of slide 3's text ("Ed S") — confirmed by continuing one
+click past slide 13 and landing back on slide 1 ("Kay"). So the widget's
+own data has 12 unique reviews padded to a displayed count of 13 by one
+repeated entry — a property of the practice's review widget, not a capture
+error. All 12 unique reviews (reviewer first name/initial + verbatim quote)
+are in `reviews-rendered.md`. No star ratings, dates, or platform labels are
+shown on the cards; the "Read More" link points to a Google Search results
+page, implying a Google-reviews source, but that is an inference and is
+flagged as such in `reviews-rendered.md`, not stated as confirmed fact.
+
 ## Screenshots
 
-| File | Source URL | Date | Method | Width | Result |
+| File | Source URL | Date | Method | Actual size | Result |
 |---|---|---|---|---|---|
 | home-desktop.png | / | 2026-07-22 | Firecrawl screenshot fallback (`--format screenshot`) | 1920×1080 | OK — verified PNG via `file` |
 | services-desktop.png | /services-and-pricing | 2026-07-22 | Firecrawl screenshot fallback (`--format screenshot`) | 1920×1080 | OK — verified PNG via `file` |
-| home-mobile.png | / | 2026-07-22 | **not captured** | — | See note below |
-| services-mobile.png | /services-and-pricing | 2026-07-22 | **not captured** | — | See note below |
+| home-mobile.png | / | 2026-07-22 | `firecrawl interact` (Playwright code exec, mobile-emulated browser context) | 390×843 | OK — verified PNG via `file`, visually confirmed real Wix mobile layout (hamburger nav, stacked content) |
+| services-mobile.png | /services-and-pricing | 2026-07-22 | `firecrawl interact` (Playwright code exec, mobile-emulated browser context) | 390×843 | OK — verified PNG via `file`, visually confirmed real Wix mobile layout |
 
-**Note on screenshots:** The browser-pane tools (`mcp__Claude_Browser__*`) can render and resize a live tab (confirmed at 1280×800 and mobile-style widths) but this session has no tool to export the rendered pixels to a PNG file on disk — the `computer` screenshot action returns an inline image to the chat only. Per the brief's documented fallback, screenshots were captured via `firecrawl scrape --format screenshot` instead, which returns a signed GCS URL that was downloaded with `curl` and verified with `file`. That fallback has no CLI flag for mobile/narrow viewport emulation (`firecrawl scrape --help` shows no `--mobile`/`--viewport` option), so only desktop-width (1920×1080) screenshots were obtainable for `home` and `services-and-pricing`. Mobile-width screenshots could not be produced by either available method in this environment. This is a gap for Task 2 (or whichever later task needs mobile-visual reference) to be aware of — it may need to re-attempt with a tool that supports device emulation, or accept desktop-only screenshots as the visual reference.
+**Note on screenshot methods:** The browser-pane tools (`mcp__Claude_Browser__*`) can render and resize a live tab, but this session has no tool that exports those rendered pixels to a PNG file on disk — the `computer` screenshot action only returns an inline image to chat, with no accessible path to the raw bytes via Bash. Desktop screenshots used the brief's documented Firecrawl fallback (`--format screenshot` → signed URL → `curl`).
 
-## Computed styles (Step 4)
+For mobile, the plain Firecrawl fallback has no viewport/device flag, and a first attempt via `firecrawl interact` using `page.setViewportSize({width:375,height:812})` alone reproduced the *desktop* layout simply squeezed into a narrow viewport (horizontal scrollbar, text cut off past the right edge) — because Wix serves its dedicated mobile design based on mobile *device emulation* (user agent + `isMobile`/`hasTouch` context flags), not viewport width alone. Once the interact script created a genuine mobile browser context —
+```js
+await browser.newContext({
+  viewport: {width: 390, height: 844},
+  isMobile: true,
+  hasTouch: true,
+  userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1'
+})
+```
+— navigated to the page, waited ~4s, and called `page.screenshot({fullPage:false})`, returning the PNG bytes as base64 (decoded locally with `python3 -c "import base64; ..."`) — Wix served its actual mobile-optimized layout (hamburger menu icon, single-column stacked content, floating contact-bubble button visible in the corner). Both `home-mobile.png` and `services-mobile.png` were captured this way and are genuine representations of what a phone visitor sees, not narrowed desktop views.
 
-`computed-styles.json` — captured via `javascript_tool` against the live homepage (https://cfdentistrysnohomish.com, rendered in the browser pane at 1280×800), using the exact JS snippet specified in the brief. Saved verbatim, no fonts inferred from CSS source.
+## Computed styles (Step 4, corrected)
 
-**Concern flagged for later tasks:** `h1` and `h2` returned real, distinct values (`barlow-medium, barlow, sans-serif`, 72px/22px, color `rgb(55, 37, 50)` / `#372532`), consistent with a real heading match. But `body`, `nav`, `link`, and `button` all returned generic browser-default values (Arial/Helvetica, 10px or 14px, link color `rgb(0,0,238)` — the browser's default unvisited-link blue). This strongly suggests `document.querySelector('nav')`, `('main a, a')`, and `('button, [role="button"]')` matched elements outside Wix's actual rendered content (Wix commonly renders primary content inside an iframe/shadow structure), not the visible nav/link/button styling seen in the screenshots. **Do not treat the `body`/`nav`/`link`/`button` entries in `computed-styles.json` as reliable brand-style evidence** — only `h1`/`h2` look trustworthy as captured. A later task should re-run computed-style extraction with more targeted selectors if link/button/nav styling is needed.
+`computed-styles.json` — captured via `javascript_tool` against the live homepage. The first pass (brief's exact generic selectors: `nav`, `main a, a`, `button, [role="button"]`) returned browser-default values for `body`/`nav`/`link`/`button` because those selectors matched Wix wrapper elements that carry no visible text styling directly — the real styling lives on nested child elements. `h1`/`h2` were fine on the first pass since those selectors happened to hit real heading elements directly.
+
+**Fix applied:** inspected the live DOM (`read_page` + `javascript_tool`, including a recursive shadow-DOM walk to rule out closed shadow roots) to find the actual styled elements, then re-ran computed-style extraction against those specific selectors. `computed-styles.json` was overwritten with the corrected data; each field now records which exact selector produced it and whether it's the "real" value or the outer-wrapper default (kept for transparency, marked `reliable: false`):
+
+- **body** — `p.font_9.wixui-rich-text__text` (the "Employment Opportunities" paragraph) → real: `avenir-lt-w01_35-light1475496, sans-serif`, 15px, color `#372532` (matches h1/h2 color — consistent brand text color).
+- **nav** — container `nav.nzOiVF` is an unstyled wrapper (default Arial/10px/black, `reliable:false`); the real nav-item text lives on the nested `p.wGxoBM` → `avenir-lt-w01_35-light1475496, sans-serif`, 14px, color `#6C6869` (muted gray-brown).
+- **link** — outer `a.qMvpu5` (the "Home" nav link) is default browser link-blue (`reliable:false`, since the `<a>` has no direct text node); the nested `p.wGxoBM` inside it is the real rendered value → same `#6C6869`, 14px avenir as nav text.
+- **button** — `a.wixui-button` (identified as the homepage "Pay Here" button) → real background `rgb(89,103,73)` / `#596749`, an olive green close to the logo's dark olive mark (`#5D5F4A`, see logo color samples below). The button's own text-color field is an unused default; the actual label text lives in a nested `span.wixui-button__label` → real white text (`#FFFFFF`), avenir, 15px.
+- **h1 / h2** — unchanged from the first pass, already reliable: `barlow-medium, barlow, sans-serif`, 72px/22px, color `#372532`.
 
 ## Logo + practice photos (Step 5)
 

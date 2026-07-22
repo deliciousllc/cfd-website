@@ -1,44 +1,103 @@
 {
-  "body": {
-    "fontFamily": "Arial, Helvetica, sans-serif",
-    "fontSize": "10px",
-    "fontWeight": "400",
-    "color": "rgb(0, 0, 0)",
-    "background": "rgba(0, 0, 0, 0)"
-  },
+  "_method": "Re-captured 2026-07-22 after DOM inspection (read_page + javascript_tool) identified the actual styled elements. Wix renders each component as an outer positioning/background wrapper plus nested text elements; querying only the outer tag (as in the first pass) frequently hits an unstyled wrapper and returns browser defaults. Each entry below records the exact selector used and whether it is the real rendered value.",
   "h1": {
+    "selector": "document.querySelector('h1')",
+    "reliable": true,
     "fontFamily": "barlow-medium, barlow, sans-serif",
     "fontSize": "72px",
     "fontWeight": "400",
     "color": "rgb(55, 37, 50)",
+    "colorHex": "#372532",
     "background": "rgba(0, 0, 0, 0)"
   },
   "h2": {
+    "selector": "document.querySelector('h2')",
+    "reliable": true,
     "fontFamily": "barlow-medium, barlow, sans-serif",
     "fontSize": "22px",
     "fontWeight": "400",
     "color": "rgb(55, 37, 50)",
+    "colorHex": "#372532",
+    "background": "rgba(0, 0, 0, 0)"
+  },
+  "body": {
+    "selector": "document.querySelector('p.font_9.wixui-rich-text__text')",
+    "note": "Real body-copy paragraph (the 'Employment Opportunities' text block on the homepage). Confirmed by reading the paragraph's own text content before sampling style.",
+    "reliable": true,
+    "fontFamily": "avenir-lt-w01_35-light1475496, sans-serif",
+    "fontSize": "15px",
+    "fontWeight": "400",
+    "color": "rgb(55, 37, 50)",
+    "colorHex": "#372532",
     "background": "rgba(0, 0, 0, 0)"
   },
   "nav": {
-    "fontFamily": "Arial, Helvetica, sans-serif",
-    "fontSize": "10px",
-    "fontWeight": "400",
-    "color": "rgb(0, 0, 0)",
-    "background": "rgba(0, 0, 0, 0)"
+    "container_selector": "document.querySelector('nav.nzOiVF')",
+    "container_note": "The <nav> element itself is just a layout wrapper and carries no visible text styling directly on it -- this is why the first pass (plain document.querySelector('nav')) returned browser defaults.",
+    "container_reliable": false,
+    "container": {
+      "fontFamily": "Arial, Helvetica, sans-serif",
+      "fontSize": "10px",
+      "fontWeight": "400",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "text_selector": "document.querySelector('nav.nzOiVF p.wGxoBM')",
+    "text_note": "The actual nav item label element (e.g. the 'Home' menu label paragraph nested inside the nav link).",
+    "text_reliable": true,
+    "text": {
+      "fontFamily": "avenir-lt-w01_35-light1475496, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "color": "rgb(108, 104, 105)",
+      "colorHex": "#6C6869",
+      "background": "rgba(0, 0, 0, 0)"
+    }
   },
   "link": {
+    "outer_selector": "document.querySelector('a.qMvpu5')",
+    "outer_note": "The nav link <a> tag itself (class qMvpu5, the 'Home' link) has no direct text node -- its text lives in a nested <p>, so the <a>'s own computed color falls back to the browser's default unvisited-link blue.",
+    "outer_reliable": false,
+    "outer": {
+      "fontFamily": "avenir-lt-w01_35-light1475496, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "color": "rgb(0, 0, 238)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "text_selector": "document.querySelector('a.qMvpu5 p.wGxoBM')",
+    "text_note": "Same nested label paragraph as nav.text -- this is the real rendered link color/font.",
+    "text_reliable": true,
+    "text": {
+      "fontFamily": "avenir-lt-w01_35-light1475496, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "color": "rgb(108, 104, 105)",
+      "colorHex": "#6C6869",
+      "background": "rgba(0, 0, 0, 0)"
+    }
+  },
+  "button": {
+    "selector": "document.querySelector('a.wixui-button')",
+    "note": "Real CTA button element identified by DOM inspection -- this specific one is the homepage 'Pay Here' button (Online Bill Pay section). The background color is genuinely set on this outer element.",
+    "reliable": true,
     "fontFamily": "Arial, Helvetica, sans-serif",
     "fontSize": "10px",
     "fontWeight": "400",
     "color": "rgb(0, 0, 238)",
-    "background": "rgba(0, 0, 0, 0)"
-  },
-  "button": {
-    "fontFamily": "Helvetica, Arial, \u30e1\u30a4\u30ea\u30aa, meiryo, \"\u30d2\u30e9\u30ae\u30ce\u89d2\u30b4 pro w3\", \"hiragino kaku gothic pro\", sans-serif",
-    "fontSize": "14px",
-    "fontWeight": "400",
-    "color": "rgb(17, 109, 255)",
-    "background": "rgb(255, 255, 255)"
+    "background": "rgb(89, 103, 73)",
+    "backgroundHex": "#596749",
+    "background_note": "This olive-green background is the real, reliable value for this element -- it closely matches the logo's dark olive mark color (#5D5F4A) sampled separately in capture-log.md.",
+    "label_selector": "document.querySelector('a.wixui-button .wixui-button__label')",
+    "label_note": "The button's visible text lives in a nested <span class=\"wixui-button__label\">, not directly on the <a> -- this is the real rendered label style (the <a>'s own 'color' field above is an unused default, since the label span overrides it).",
+    "label_reliable": true,
+    "label": {
+      "fontFamily": "avenir-lt-w01_35-light1475496, sans-serif",
+      "fontSize": "15px",
+      "fontWeight": "400",
+      "color": "rgb(255, 255, 255)",
+      "colorHex": "#FFFFFF",
+      "background": "rgba(0, 0, 0, 0)"
+    }
   }
 }
