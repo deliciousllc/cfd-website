@@ -21,6 +21,34 @@ This is a raw-evidence capture — no interpretation, no improvised facts.
 
 No page 404'd or scraped empty. All 8 requested captures returned real page content confirmed by manual read-through (not error/placeholder pages).
 
+## Page scrapes — Task 2 (service inventory completion)
+
+Full inventory/mapping and cross-check methodology recorded in
+`service-inventory.md`. The 11 mapped nav pages not yet captured in Task 1
+were scraped this task:
+
+| File | Source URL | Date | Method | Result |
+|---|---|---|---|---|
+| fillings-and-crowns.md | /fillings-and-crowns | 2026-07-22 | firecrawl scrape | OK — 702 bytes, pricing present |
+| cosmetic-dentistry.md | /cosmetic-dentistry | 2026-07-22 | firecrawl scrape | OK — 836 bytes, pricing present |
+| botox.md | /botox | 2026-07-22 | firecrawl scrape | OK — 686 bytes, pricing present |
+| blank-page-1.md | /blank-page-1 | 2026-07-22 | firecrawl scrape | OK — 317 bytes, no pricing on this page (see service-inventory.md concern re: merge with botox.md) |
+| willo.md | /willo | 2026-07-22 | firecrawl scrape | OK — 971 bytes |
+| copy-of-fillings-and-crowns.md | /copy-of-fillings-and-crowns | 2026-07-22 | firecrawl scrape | OK — 958 bytes, pricing present (TMJ) |
+| kidsdays.md | /kidsdays | 2026-07-22 | firecrawl scrape | OK — 1,103 bytes; gallery image src/alt attributes did not resolve to real asset URLs (lazy-load artifact), body text unaffected |
+| blank-page.md | /blank-page | 2026-07-22 | firecrawl scrape | OK — 883 bytes, no pricing on this page (see service-inventory.md concern re: merge with copy-of-fillings-and-crowns-1.md) |
+| copy-of-fillings-and-crowns-1.md | /copy-of-fillings-and-crowns-1 | 2026-07-22 | firecrawl scrape | OK — 982 bytes, pricing present (Sleep Apnea) |
+| copy-of-fillings-and-crowns-2.md | /copy-of-fillings-and-crowns-2 | 2026-07-22 | firecrawl scrape | OK — 722 bytes, pricing present (Invisalign) |
+| copy-of-fillings-and-crowns-4.md | /copy-of-fillings-and-crowns-4 | 2026-07-22 | firecrawl scrape | OK — 1,018 bytes, pricing present (Teeth Whitening) |
+
+No page 404'd or scraped empty. All 11 requested captures returned real page
+content confirmed by manual read-through. Cross-check of the rendered "More"
+nav dropdown against the `home.json` link dump found no discrepancy — see
+`service-inventory.md` Step 1 for method and result. Two pairs of nav items
+marked in the spec as "merge the duplicate" turned out to have
+non-duplicate content (different facts/pricing on each side) — flagged as a
+concern for Task 3 in `service-inventory.md`.
+
 ## Rendered reviews (reviews-rendered.md, corrected)
 
 The `/about-me` page's review quotes are not DOM text — the widget displays
