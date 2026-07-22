@@ -1,32 +1,222 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Base-aware URLs. CSS/markup on GitHub Pages must respect the /cfd-website base;
+// a hardcoded "/services" or "/images/x.jpg" 404s. Only Astro frontmatter can
+// read import.meta.env.BASE_URL.
+const base = import.meta.env.BASE_URL;
+const b = base.endsWith("/") ? base : base + "/";
+const servicesUrl = b + "services/";
+const aboutUrl = b + "about/";
+const buildingImg = b + "images/building.jpg";
+
+const tel = "tel:360-568-6017";
+
+// Google Maps link to the verbatim practice address (products.md: no map is
+// stated on the source site, so this is a redesign-added convenience link, not
+// a quoted fact — the address string itself is verbatim).
+const mapsUrl =
+  "https://www.google.com/maps/search/?api=1&query=133+Maple+Ave+Snohomish+WA+98290";
+
+// The five Task-2 service groups. Names and anchor IDs are LOCKED by
+// service-inventory.md — never rename or re-slug. Descriptions are rewritten
+// from the practice's own service copy (products.md); no contested price appears
+// here — pricing lives on the Services page.
+const services = [
+  {
+    name: "Routine care",
+    anchor: "routine-care",
+    body:
+      "Cleanings and exams every six months. X-rays, a gentle cleaning, and a hygienist who shows you how to keep decay and gum disease away at home.",
+  },
+  {
+    name: "Restorative",
+    anchor: "restorative",
+    body:
+      "Fillings, crowns, and extractions to get a sore or damaged tooth healthy again.",
+  },
+  {
+    name: "Cosmetic",
+    anchor: "cosmetic",
+    body:
+      "Whitening, veneers, and Invisalign to renew your smile — plus Botox and fillers, whether or not you’re a patient here.",
+  },
+  {
+    name: "Sleep & TMJ",
+    anchor: "sleep-tmj",
+    body:
+      "At-home sleep testing and custom oral appliances for sleep apnea, and relief for the jaw pain, clicking, and headaches of TMJ.",
+  },
+  {
+    name: "Technology & extras",
+    anchor: "technology-extras",
+    body:
+      "3D-printed night guards made in-house, gentle laser treatment, the Willo brushing system, and themed Kids’ Days for younger patients.",
+  },
+];
+
+// Three doctors — names and credentials verbatim from products.md (gotcha 11).
+const doctors = [
+  "Dr. Eve Rutherford DDS",
+  "Dr. Rachel Greene DDS",
+  "Dr. Samiksha Gulrajani DMD",
+];
+
+// 2–3 patient reviews, verbatim from products.md (gotcha 12: typos preserved,
+// e.g. "bestest"). Attribution as published (first name / first name + initial).
+const reviews = [
+  {
+    name: "Meagan",
+    quote:
+      "I highly recommend Centennial Family Dentistry to anyone who feels anxious about going to the dentist. The staff is incredibly patient and understanding, and they take the time to answer all of my questions. They’ve made me feel so comfortable that I’ve even recommended them to several friends and family members.",
+  },
+  {
+    name: "Ashley",
+    quote:
+      "Hands down the best dental experience I’ve ever had. The dental assistant and Dr. Greene were exceptional and made me feel so comfortable. What a cozy, homey dental office. I actually can’t wait for my next appointment!",
+  },
+  {
+    name: "Yoni",
+    quote: "Dr. Gulrajani is the bestest.",
+  },
+];
+
+// Hours — verbatim from products.md (inconsistent abbreviations and the missing
+// "am" on Thursday are intentional, reproduced exactly).
+const hours = [
+  "Mon: 7:30am-4:00pm",
+  "Tues: 8:00am-4:30pm",
+  "Wednesday: 7:30am-5:00pm",
+  "Thursday: 7:30-4:00pm",
+  "Friday: By Appointment Only",
+  "Saturday & Sunday: Closed",
+];
 ---
 
 <BaseLayout
   title="Home | Centennial Family Dentistry Snohomish"
   description="Centennial Family Dentistry. We are a Snohomish dentist here to provide a dental home focused on prevention, education, compassion and meticulous dental care"
 >
-  <section class="container placeholder">
-    <p class="placeholder__eyebrow">Concept redesign</p>
-    <h1>Centennial Family Dentistry</h1>
-    <p class="placeholder__lede">
-      The Office of Dr. Eve Rutherford DDS, Dr. Rachel Greene DDS, and Dr.
-      Samiksha Gulrajani DMD.
-    </p>
-    <p>
-      This is a placeholder home page for the shared shell — the real home page
-      arrives in a later task. The navigation and footer below are the evergreen
-      identity in the browser.
-    </p>
+  <!-- Hero -->
+  <section class="hero container" aria-labelledby="hero-title">
+    <div class="hero__text">
+      <p class="eyebrow">Family dentistry in Snohomish, Washington</p>
+      <h1 id="hero-title">Centennial Family Dentistry</h1>
+      <p class="hero__lede">
+        A Snohomish dental home for anyone who has been putting the dentist off.
+        You’ll know the price before you’re in the chair, and you’ll know your
+        dentist by name.
+      </p>
+      <p class="hero__doctors">
+        The office of Dr. Eve Rutherford DDS, Dr. Rachel Greene DDS, and Dr.
+        Samiksha Gulrajani DMD.
+      </p>
+      <a class="btn-call hero__cta" href={tel}>Call 360-568-6017</a>
+    </div>
+    <div class="hero__media">
+      <img
+        src={buildingImg}
+        width="1600"
+        height="900"
+        alt="The Centennial Family Dentistry building at 133 Maple Ave in Snohomish, Washington."
+      />
+    </div>
+  </section>
+
+  <!-- Services overview -->
+  <section class="section container" aria-labelledby="services-title">
+    <div class="section__head">
+      <h2 id="services-title">What we do</h2>
+      <a class="section__link" href={servicesUrl}>See all services &amp; prices</a>
+    </div>
+    <ul class="cards" role="list">
+      {
+        services.map((s) => (
+          <li class="card-item">
+            <a class="card" href={`${servicesUrl}#${s.anchor}`}>
+              <h3 class="card__title">{s.name}</h3>
+              <p class="card__body">{s.body}</p>
+              <span class="card__more" aria-hidden="true">See details &amp; pricing &rarr;</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- Meet the doctors teaser -->
+  <section class="section container" aria-labelledby="doctors-title">
+    <div class="doctors">
+      <h2 id="doctors-title">The people who’ll be treating you</h2>
+      <p class="doctors__intro">
+        Three dentists, and every hygienist and coordinator behind them, have a
+        name and a face here. Dr. Greene grew up in Snohomish and came home to
+        practice.
+      </p>
+      <ul class="doctors__list" role="list">
+        {doctors.map((d) => <li class="doctors__name">{d}</li>)}
+      </ul>
+      <a class="section__link" href={aboutUrl}>Meet the doctors &amp; staff</a>
+    </div>
+  </section>
+
+  <!-- Reviews strip -->
+  <section class="section reviews" aria-labelledby="reviews-title">
+    <div class="container">
+      <h2 id="reviews-title">See what our patients are saying</h2>
+      <ul class="reviews__list" role="list">
+        {
+          reviews.map((r) => (
+            <li>
+              <blockquote class="review">
+                <p class="review__quote">{r.quote}</p>
+                <cite class="review__cite">{r.name}</cite>
+              </blockquote>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="section__link" href={aboutUrl}>Read more patient reviews</a>
+    </div>
+  </section>
+
+  <!-- Visit us -->
+  <section class="section container" aria-labelledby="visit-title">
+    <h2 id="visit-title">Visit us</h2>
+    <div class="visit">
+      <div class="visit__col">
+        <h3 class="visit__sub">Hours of Operation</h3>
+        <ul class="visit__hours" role="list">
+          {hours.map((h) => <li>{h}</li>)}
+        </ul>
+      </div>
+      <div class="visit__col">
+        <h3 class="visit__sub">Find us</h3>
+        <address class="visit__address">
+          133 Maple Ave<br />
+          Snohomish WA 98290
+        </address>
+        <p class="visit__line">
+          <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+            Get directions on Google Maps
+          </a>
+        </p>
+        <p class="visit__line">
+          <a href={tel}>Phone: 360-568-6017</a>
+        </p>
+        <a class="btn-call visit__cta" href={tel}>Call 360-568-6017</a>
+      </div>
+    </div>
   </section>
 </BaseLayout>
 
 <style>
-  .placeholder {
+  /* --- Shared section rhythm ------------------------------------------------ */
+  .section {
     padding-block: var(--space-2xl);
   }
 
-  .placeholder__eyebrow {
+  .eyebrow {
     font-family: var(--font-ui);
     font-size: var(--text-xs);
     font-weight: 600;
@@ -36,13 +226,241 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     margin-bottom: var(--space-sm);
   }
 
-  .placeholder h1 {
-    margin-bottom: var(--space-md);
+  .section__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
   }
 
-  .placeholder__lede {
+  .section__link {
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-green);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    white-space: nowrap;
+  }
+
+  .section__link:hover {
+    color: var(--color-green-deep);
+  }
+
+  /* --- Hero ----------------------------------------------------------------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    padding-block: var(--space-2xl);
+  }
+
+  .hero__lede {
+    font-family: var(--font-display);
     font-size: var(--text-lg);
+    line-height: var(--leading-body);
+    color: var(--color-ink);
+    margin-top: var(--space-md);
+  }
+
+  .hero__doctors {
+    font-size: var(--text-base);
     color: var(--color-ink-muted);
-    margin-bottom: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .hero__cta {
+    margin-top: var(--space-lg);
+  }
+
+  .hero__media img {
+    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  /* --- Service cards -------------------------------------------------------- */
+  .cards {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .card-item {
+    display: flex;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    width: 100%;
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    border-color: var(--color-green);
+    box-shadow: var(--shadow);
+    color: var(--color-ink);
+  }
+
+  .card__title {
+    color: var(--color-green);
+  }
+
+  .card__body {
+    max-width: none;
+    color: var(--color-ink);
+  }
+
+  .card__more {
+    margin-top: auto;
+    padding-top: var(--space-2xs);
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-green);
+  }
+
+  /* --- Doctors teaser ------------------------------------------------------- */
+  .doctors__intro {
+    font-size: var(--text-lg);
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .doctors__list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  .doctors__name {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  /* --- Reviews -------------------------------------------------------------- */
+  .reviews {
+    background: var(--color-paper);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .reviews__list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  .review {
+    height: 100%;
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .review__quote {
+    max-width: none;
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    color: var(--color-ink);
+  }
+
+  .review__cite {
+    display: block;
+    margin-top: var(--space-md);
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    font-style: normal;
+    color: var(--color-green);
+  }
+
+  /* --- Visit us ------------------------------------------------------------- */
+  .visit {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    margin-top: var(--space-lg);
+  }
+
+  .visit__sub {
+    margin-bottom: var(--space-sm);
+  }
+
+  .visit__hours {
+    list-style: none;
+    padding: 0;
+  }
+
+  .visit__hours li {
+    padding-block: var(--space-3xs);
+    color: var(--color-ink);
+  }
+
+  .visit__address {
+    font-style: normal;
+    color: var(--color-ink);
+    margin-bottom: var(--space-sm);
+  }
+
+  .visit__line {
+    margin-bottom: var(--space-2xs);
+  }
+
+  .visit__line a {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .visit__cta {
+    margin-top: var(--space-sm);
+  }
+
+  /* --- Wider viewports ------------------------------------------------------ */
+  @media (min-width: 700px) {
+    .cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .reviews__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .visit {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .hero {
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+    }
+
+    .cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 </style>
