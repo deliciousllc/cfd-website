@@ -12,7 +12,8 @@ This is a raw-evidence capture — no interpretation, no improvised facts.
 | services-and-pricing.md | /services-and-pricing | 2026-07-22 | firecrawl scrape | OK — 36 lines, 500 bytes |
 | financing.md | /financing | 2026-07-22 | firecrawl scrape | OK — 20 lines, 1,450 bytes |
 | reviews.md | /about-me | 2026-07-22 | firecrawl scrape | OK — 18 lines, 1,301 bytes. Page is a "Check out our reviews" widget page whose markdown/DOM text extraction has no review quotes (see `reviews-rendered.md` below for the actual review text, extracted by reading the widget's rendered image cards directly). |
-| reviews-rendered.md | /about-me | 2026-07-22 | browser (lightbox screenshots, read directly) | OK — 6,926 bytes. 12 unique verbatim review quotes with reviewer name, transcribed by reading the widget's fullscreen lightbox slides (each slide is a 1080×1080 image with the quote baked in as text). See "Rendered reviews" section below for method detail. |
+| reviews-rendered.md | /about-me | 2026-07-22 | browser (lightbox screenshots, read directly; source image URLs added via gallery DOM data on a follow-up visit) | OK — 10,754 bytes. 12 unique verbatim review quotes with reviewer name, transcribed by reading the widget's fullscreen lightbox slides (each slide is a 1080×1080 image with the quote baked in as text), plus a per-quote source image URL (13/13 obtained) for later re-verification. See "Rendered reviews" section below for method detail. |
+| computed-styles.json | / | 2026-07-22 | browser javascript_tool | OK — 4,832 bytes. Valid JSON; corrected computed-style values for body/nav/link/button/h1/h2, each tagged with the exact selector used and `reliable: true/false`. See "Computed styles (Step 4, corrected)" section below. |
 | routine-cleanings-and-exams.md | /routine-cleanings-and-exams | 2026-07-22 | firecrawl scrape | OK — 24 lines, 1,073 bytes |
 | laser.md | /laser | 2026-07-22 | firecrawl scrape | OK — 22 lines, 531 bytes |
 | 3d-printing.md | /3d-printing | 2026-07-22 | firecrawl scrape | OK — 14 lines, 870 bytes |
@@ -47,6 +48,20 @@ are in `reviews-rendered.md`. No star ratings, dates, or platform labels are
 shown on the cards; the "Read More" link points to a Google Search results
 page, implying a Google-reviews source, but that is an inference and is
 flagged as such in `reviews-rendered.md`, not stated as confirmed fact.
+
+**Follow-up (same date): per-quote source image URLs added.** On a second
+visit to `/about-me`, each review's original source image URL (Wix transform
+parameters stripped, i.e. the full-resolution asset behind that carousel
+slide) was added inline under its quote in `reviews-rendered.md`, so every
+transcription can be re-verified against its source image later at no cost.
+13/13 URLs were obtained by reading the gallery widget's own DOM data
+(`aria-describedby="describedby_item-N-..."` on each slide's zoom button, in
+document order) rather than by re-paging the lightbox — this session's
+lightbox click did not render past the low-quality blur placeholder. Slide 1
+("Kay") matches the URL independently confirmed by the coordinator, which
+cross-validates the index-order mapping; slides 2–13 were not individually
+re-confirmed against a legible on-screen image this pass. See
+`reviews-rendered.md`'s "Source image URL method" section for full detail.
 
 ## Screenshots
 
