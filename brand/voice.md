@@ -214,3 +214,8 @@ Added after owner review of the first built pages; these join the original anti-
 - **No em dashes in prose.** Use commas, colons, semicolons, or periods. `[RATIFIED]`
 - **Default to the practice's own published wording** when a line is needed; invent as little
   as possible. `[RATIFIED]`
+- **The site speaks AS the practice, never about it.** "The prices below are the practice's
+  own published rates" is pitch-narrator voice leaking into patient-facing copy; the reader
+  is a patient, and the voice is "we"/"our." Meta-commentary about the pitch belongs only in
+  the footer disclaimer. `[RATIFIED]` — owner: "Are you speaking to the customer here, or
+  are you speaking to someone else?"

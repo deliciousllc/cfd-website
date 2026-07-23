@@ -13,3 +13,13 @@ Huskies), so these come from other pages. All 856d6c_ (practice-owned) media.
 
 Rejected candidates (stock, not practice photos): 856d6c_c4d5a646 (aligner-in-hand stock),
 856d6c_ff17e6dc (TMJ stock, 612px). No children appear in any captured photo.
+
+## Service-tile images (2026-07-23, "Services Provided" restoration)
+The original homepage's Services Provided section pairs each service link with an
+illustrative image. All 12 recaptured at full res into `service-tiles/` (Kids' Days
+reuses hawaii.jpg above). Source: static.wixstatic.com media IDs as served on
+https://www.cfdentistrysnohomish.com/ (captured 2026-07-23): routine=ca9b4b9a...,
+fillings=b03a584e..., cosmetic=423bf12a..., sleep=856d6c_c4d5a646...,
+tmj=856d6c_ff17e6dc..., botox=11062b_7a4dfef8..., invisalign=11062b_2648c9fe...,
+laser=856d6c_d52b1065..., whitening=856d6c_e090e298..., 3dprint=856d6c_0cfc8f18...,
+willo=856d6c_43659881... Non-856d6c IDs are Wix stock the practice itself displays.

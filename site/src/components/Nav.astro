@@ -33,7 +33,7 @@ const tel = "tel:360-568-6017";
 ---
 
 <header class="nav">
-  <div class="nav__inner container">
+  <div class="nav__inner">
     <a class="nav__brand" href={href("")} aria-label="Centennial Family Dentistry — Home">
       <img
         class="nav__logo"
@@ -70,6 +70,10 @@ const tel = "tel:360-568-6017";
   }
 
   .nav__inner {
+    /* Full-width bar (owner preference, matching the original site): the nav
+       spans the page edge to edge rather than sitting in the content column. */
+    width: 100%;
+    padding-inline: var(--gutter);
     display: grid;
     /* Mobile: two rows.
        row 1: brand (left) + call (right); row 2: links span both columns. */

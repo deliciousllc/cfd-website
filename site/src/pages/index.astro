@@ -76,40 +76,83 @@ const doctorCards = [
 const mapsUrl =
   "https://www.google.com/maps/search/?api=1&query=133+Maple+Ave+Snohomish+WA+98290";
 
-// The five Task-2 service groups. Names and anchor IDs are LOCKED by
-// service-inventory.md — never rename or re-slug. Descriptions are rewritten
-// from the practice's own service copy (products.md); no contested price appears
-// here — pricing lives on the Services page.
+// Services Provided — the original site's own section: each service named as
+// the practice names it, with the same illustrative image the practice pairs
+// it with (recaptured 2026-07-23, see capture log). Tiles deep-link into the
+// grouped Services & Pricing page via the LOCKED anchor IDs from
+// service-inventory.md — the 12 tiles map onto the 6 page sections.
 const services = [
   {
-    name: "Routine care",
+    name: "Routine Cleanings and Exams",
     anchor: "routine-care",
-    body:
-      "Cleanings and exams every six months. X-rays, a gentle cleaning, and a hygienist who shows you how to keep decay and gum disease away at home.",
+    img: b + "images/svc-routine.jpg",
+    alt: "A gloved hand holding a dental X-ray up to the light.",
   },
   {
-    name: "Restorative",
+    name: "Fillings and Crowns",
     anchor: "restorative",
-    body:
-      "Fillings, crowns, and extractions to get a sore or damaged tooth healthy again.",
+    img: b + "images/svc-fillings.jpg",
+    alt: "A dentist seated in a treatment room, smiling.",
   },
   {
-    name: "Cosmetic",
+    name: "Cosmetic Dentistry",
     anchor: "cosmetic",
-    body:
-      "Whitening, veneers, and Invisalign to renew your smile, plus Botox and fillers, whether or not you’re a patient here.",
+    img: b + "images/svc-cosmetic.jpg",
+    alt: "A close-up of a bright smile beside a dental mirror.",
   },
   {
-    name: "Sleep & TMJ",
+    name: "Sleep Apnea",
     anchor: "sleep-tmj",
-    body:
-      "At-home sleep testing and custom oral appliances for sleep apnea, and relief for the jaw pain, clicking, and headaches of TMJ.",
+    img: b + "images/svc-sleep.jpg",
+    alt: "A hand holding a pair of clear oral appliances.",
   },
   {
-    name: "Technology & extras",
+    name: "TMJ",
+    anchor: "sleep-tmj",
+    img: b + "images/svc-tmj.jpg",
+    alt: "A woman pressing her hands to her jaw in discomfort.",
+  },
+  {
+    name: "Botox",
+    anchor: "cosmetic",
+    img: b + "images/svc-botox.jpg",
+    alt: "A cosmetic injection being administered near the lips.",
+  },
+  {
+    name: "Invisalign",
+    anchor: "cosmetic",
+    img: b + "images/svc-invisalign.jpg",
+    alt: "A smiling woman holding a clear aligner.",
+  },
+  {
+    name: "Laser Dentistry",
     anchor: "technology-extras",
-    body:
-      "3D-printed night guards made in-house, gentle laser treatment, the Willo brushing system, and themed Kids’ Days for younger patients.",
+    img: b + "images/svc-laser.jpg",
+    alt: "A dental laser device with a touchscreen control panel.",
+  },
+  {
+    name: "Teeth Whitening",
+    anchor: "cosmetic",
+    img: b + "images/svc-whitening.jpg",
+    alt: "A woman pointing to her white smile.",
+  },
+  {
+    name: "3D Printing",
+    anchor: "technology-extras",
+    img: b + "images/svc-3dprint.jpg",
+    alt: "A hand holding a 3D-printed dental model beside a resin printer.",
+  },
+  {
+    name: "Willo Toothbrush",
+    anchor: "technology-extras",
+    img: b + "images/svc-willo.jpg",
+    alt: "The Willo automated toothbrushing device.",
+  },
+  {
+    name: "Kids’ Days",
+    anchor: "technology-extras",
+    img: b + "images/svc-kidsdays.jpg",
+    alt: "Team members in Hawaiian shirts and leis outside the office for a themed day.",
   },
 ];
 
@@ -218,20 +261,25 @@ const hours = [
     <img class="lightbox__img" data-lightbox-img src="" alt="" />
   </div>
 
-  <!-- Services overview -->
+  <!-- Services Provided -->
   <section class="section container" aria-labelledby="services-title">
     <div class="section__head">
-      <h2 id="services-title">What we do</h2>
+      <h2 id="services-title">Services Provided</h2>
       <a class="section__link" href={servicesUrl}>See all services &amp; prices</a>
     </div>
-    <ul class="cards" role="list">
+    <ul class="tiles" role="list">
       {
         services.map((s) => (
-          <li class="card-item">
-            <a class="card" href={`${servicesUrl}#${s.anchor}`}>
-              <h3 class="card__title">{s.name}</h3>
-              <p class="card__body">{s.body}</p>
-              <span class="card__more" aria-hidden="true">See details &amp; pricing &rarr;</span>
+          <li>
+            <a class="tile" href={`${servicesUrl}#${s.anchor}`}>
+              <img
+                src={s.img}
+                width="800"
+                height="533"
+                loading="lazy"
+                alt={s.alt}
+              />
+              <span class="tile__name">{s.name}</span>
             </a>
           </li>
         ))
@@ -551,56 +599,46 @@ const hours = [
     color: var(--color-ink);
   }
 
-  /* --- Service cards -------------------------------------------------------- */
-  .cards {
+  /* --- Service tiles (image + name, per the original site) ------------------- */
+  .tiles {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg) var(--space-md);
   }
 
-  .card-item {
-    display: flex;
-  }
-
-  .card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
-    width: 100%;
-    padding: var(--space-lg);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
+  .tile {
+    display: block;
     text-decoration: none;
-    color: var(--color-ink);
-    transition: box-shadow 0.15s ease, border-color 0.15s ease;
   }
 
-  .card:hover,
-  .card:focus-visible {
-    border-color: var(--color-green);
+  .tile img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius);
     box-shadow: var(--shadow);
-    color: var(--color-ink);
+    transition: box-shadow 0.15s ease;
   }
 
-  .card__title {
-    color: var(--color-green);
+  .tile:hover img {
+    box-shadow: 0 6px 18px rgba(55, 37, 50, 0.18);
   }
 
-  .card__body {
-    max-width: none;
-    color: var(--color-ink);
-  }
-
-  .card__more {
-    margin-top: auto;
-    padding-top: var(--space-2xs);
+  .tile__name {
+    display: block;
+    margin-top: var(--space-xs);
     font-family: var(--font-ui);
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     font-weight: 600;
     color: var(--color-green);
+  }
+
+  .tile:hover .tile__name {
+    color: var(--color-green-deep);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
 
   /* --- Reviews -------------------------------------------------------------- */
@@ -687,8 +725,8 @@ const hours = [
 
   /* --- Wider viewports (768px matches the shell nav + other pages) --------- */
   @media (min-width: 768px) {
-    .cards {
-      grid-template-columns: repeat(2, 1fr);
+    .tiles {
+      grid-template-columns: repeat(3, 1fr);
     }
 
     .reviews__list {
@@ -712,10 +750,6 @@ const hours = [
     .hero__inner {
       /* The photo is the hero: it takes roughly two-thirds of the band. */
       grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    }
-
-    .cards {
-      grid-template-columns: repeat(3, 1fr);
     }
   }
 
