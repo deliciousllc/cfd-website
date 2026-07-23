@@ -1,7 +1,7 @@
 # CFD Website — Redesign Pitch Design
 
 **Date:** 2026-07-22
-**Status:** Approved — external review (Codex) adjudicated 2026-07-22; cleared for implementation planning
+**Status:** Implemented — live at https://deliciousllc.github.io/cfd-website/ (deployed 2026-07-22). Facts re-verified against the source site on deploy day: no drift.
 **Project:** `cfd-website` — spec-work redesign pitch for Centennial Family Dentistry (Snohomish, WA)
 
 ---
