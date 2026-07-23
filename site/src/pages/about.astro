@@ -34,55 +34,72 @@ const mapsUrl =
 // she gets a text-only card rather than a substituted face.
 // -------------------------------------------------------------------------
 const people = [
+  // ---- Doctors (pale-green bands). Bios VERBATIM from the original site
+  // (brand/_sources/2026-07-22/about-us.md) — owner instruction 2026-07-23:
+  // "Do not change that copy. Those are written in the voices of the actual
+  // staff." Typos and quirks in the source are preserved ("form Scripps",
+  // "hiking the trials", "Medicaid..", Savannah's "in 2016 have been").
+  // Paragraph breaks restore the original page's breaks that the scrape
+  // flattened (split where sentences run together without a space).
   {
-    name: "Dr. Eve Rutherford DDS",
+    name: "Dr. Eve Rutherford",
+    doctor: true,
     photo: "dr-eve-rutherford.jpg",
     paras: [
-      "Dr. Rutherford earned her dental degree at the University of Washington School of Dentistry, after a Bachelor of Arts with Honors in Biology from Scripps College in Claremont, California. Before dental school she worked in the University of Washington’s Department of Pathology, studying connective tissue disorders. She was raised in Kalispell, Montana, and graduated from Flathead High School.",
-      "She is dedicated to improving the oral health and overall health of her patients: preventing oral disease, and teaching patients about the links between a healthy mouth and a healthy body. She loves being a dentist and serving her patients through conscious, mindful care.",
-      "Her commitment reaches past the office. She has served on the Board of Directors for the Washington Dental Service Foundation since 2015, sat on a 2016 Washington State Health Care Authority task force to improve Adult Dental Medicaid benefits, stays active with the ABCD Program (Access to Baby and Child Dentistry), and is Affiliate Faculty for the University of Washington Department of Pediatric Dentistry.",
-      "She has two active sons who keep her on her toes. The family enjoys hiking the trails in Snohomish County and biking the Centennial Trail, and she and her husband like golfing and going out for sushi. On her own time, she loves to run and read.",
+      "Dr. Eve Rutherford is a graduate of the University of Washington School of Dentistry and received a Bachelor of Arts with Honors in Biology form Scripps College in Claremont, California. Prior to entering dental school, she worked in the Department of Pathology at the University of Washington studying connective tissue disorders. Dr. Eve was raised in Kalispell, Montana where she graduated from Flathead High School.",
+      "I am dedicated to improving the oral health and overall health of my patients. My goal is to prevent oral disease and educate patients about the links between a healthy mouth and a healthy body. I love being a dentist and serving my patients through conscious and mindful care. My dedication to improving oral health in the community extends to work I do outside the office. I have served on the Board of Directors for Washington Dental Service Foundation since 2015. During 2016 I served on a task force with Washington State Health Care Authority that seeks to improve benefits for Adult Dental Medicaid.. I am also active with the ABCD Program (Access to Baby and Child Dentistry), and Affiliate Faculty for the University of Washington Department of Pediatric Dentistry.",
+      "I have two active sons who keep me on my toes. We enjoy hiking the trials in Snohomish County and biking on Centennial Trail. My husband and I enjoy golfing and going out for sushi.",
+      "On my own time, I love to go running and read books.",
       "Dr. Rutherford practices Mondays, Tuesdays, Wednesdays, and Thursdays.",
     ],
   },
   {
-    name: "Dr. Rachel Greene DDS",
+    name: "Dr. Rachel Greene",
+    doctor: true,
     photo: "dr-rachel-greene.jpg",
     paras: [
-      "Dr. Rachel (Krell) Greene graduated from the University of Michigan School of Dentistry, after a Bachelor of Arts with Honors in Science, Technology and Society from the University of Puget Sound. She was born and raised in Snohomish and came home to practice in the community she grew up in. She is also a professor at the University of Washington School of Dentistry, serving as Clinical Director of Western Washington for the Service Learning Program and as a Clinical Instructor in the student patient clinic.",
-      "Dentistry is her passion, and she enjoys empowering people to keep a healthy mouth. She strives to help every patient have a positive experience and feel at ease at the dentist. She empathizes with those who have dental anxiety and is more than willing to work with you to find the most comfortable way through your care. Detail-oriented by nature, she focuses on precision and strives for excellence in all her restorative work.",
+      "Dr. Rachel (Krell) Greene is a graduate of the University of Michigan School of Dentistry and received Bachelor of Arts with Honors in Science, Technology and Society from the University of Puget Sound. Dr. Greene was born and raised in Snohomish and is happy to have returned to her hometown to practice in the community she grew up in. In addition to practicing dentistry, Dr. Greene is a professor at the University of Washington School of Dentistry working as the Clinical Director of Western Washington for the Service Learning Program and as a Clinical Instructor in the student patient clinic.",
+      "Dentistry is my passion and I enjoy empowering others to have a healthy mouth. I strive to help all patients have a positive dental experience and feel at ease coming to the dentist. I empathize with those who have dental anxiety and am more than willing to work with you to determine the best way to provide you with comfortable care. As a detail oriented person, my restorative focus is on precision and I strive for excellence in all my work. I look forward to meeting you and finding out how our office can best serve your dental care needs.",
       "Dr. Greene practices on Thursdays and Fridays by appointment.",
     ],
   },
   {
-    name: "Dr. Samiksha Gulrajani DMD",
+    name: "Dr. Samiksha Gulrajani",
+    doctor: true,
     photo: "dr-samiksha-gulrajani.jpg",
     paras: [
-      "Dr. Gulrajani is originally from Cincinnati, Ohio. She completed undergraduate studies in Mathematics and Neuroscience at the University of Pittsburgh, graduating with honors and a minor in Chemistry, then earned her Doctor of Dental Medicine (DMD) at the University of Pittsburgh School of Dental Medicine.",
-      "She went on to a residency in Advanced Education in General Dentistry (AEGD), treating complex cases at the university and at a local urgent care clinic. She specializes in comprehensive dental care, with a particular focus on patients with special needs.",
-      "Outside of work, she enjoys watching for orcas and baking delicious desserts.",
-      "Dr. Gulrajani practices on Monday, Tuesday, and Wednesday.",
+      "Originally from Cincinnati, Ohio, she completed her undergraduate studies in Mathematics and Neuroscience at the University of Pittsburgh, graduating with honors. She also earned a minor in Chemistry before completing her Doctor of Dental Medicine (DMD) degree at the University of Pittsburgh School of Dental Medicine. Following her education, Dr. Gulrajani further honed her skills during her residency in Advanced Education in General Dentistry (AEGD), where she treated complex cases both at the University and at a local urgent care clinic. She specializes in providing comprehensive dental care, with a particular focus on patients with special needs.",
+      "Outside of her professional work, Dr. Gulrajani enjoys spending time watching for orcas and baking delicious desserts.",
+      "Dr. Gulrajani practices on Monday, Tuesday, and Wednesday",
     ],
   },
+  // ---- Staff (white bands). Same rule: verbatim first-person bios.
   {
     name: "Brooke",
     photo: "brooke.jpg",
     paras: [
-      "Brooke has been one of our dental hygienists since 2018. She graduated from Lake Washington in 2014 and brings 10 years of experience. She loves getting to know her patients on a personal level and helping them find what works best to keep their oral health at its best. When not in the office, she loves to garden and spend time with her husband and kids.",
+      "I am one of our dental hygienists and have been with the office since 2018. I graduated from Lake Washington in 2014 and bring 10 years of experience.",
+      "I love getting to know my patients on a personal level and helping them find what works best for them to keep their oral health the best it can be.",
+      "When not in the office, I love to garden and spend time with my husband and kids.",
     ],
   },
   {
     name: "Savannah",
     photo: "savannah.jpg",
     paras: [
-      "Savannah, a dental hygienist, has been part of the Centennial team since 2021 and earned her bachelor’s degree from Seattle Central in 2016. A Pacific Northwest native, she was born and raised in Kirkland. She has a deep commitment to preventative dental care and patient education, and her approach is both thorough and compassionate. When not at the office, she enjoys quality time with her husband and two children.",
+      "I am a dedicated dental hygienist and bring my expertise and passion to every patient interaction. I earned my bachelor's degree from Seattle Central in 2016 have been a part of the Centennial team since 2021.",
+      "As a native to the Pacific Northwest, I was born and raised in Kirkland. I have a deep commitment to preventative dental care and patient education, ensuring each patient feels informed and cared for during their visit. My approach to dental hygiene is both thorough and compassionate.",
+      "When not at the office I enjoy spending quality time with my husband and two children.",
+      "I feel so privileged to work alongside such knowledgeable and supportive dentists at Centennial, and look forward to providing exceptional care to the community",
     ],
   },
   {
     name: "Juliana",
     photo: "juliana.jpg",
     paras: [
-      "Juliana is excited to be part of the Centennial team. Originally from Florida, she received her Bachelor of Science in Biology from Nova Southeastern University, then graduated from Indian River State College in 2013 with a degree in Dental Hygiene. She moved to Washington right after graduation and now calls the state home. She is passionate about gentle, personalized care and patient education. Outside of work, she loves spending time with her husband and their two kids, and in a spare moment you’ll find her with a good book or a movie.",
+      "I am very excited to join the Centennial team. Originally from Florida, I received my Bachelor of Science degree in Biology from Nova Southeastern University. I went on to graduate from Indian River State College in 2013 with a degree in Dental Hygiene. Right after graduation, I moved to Washington and now call this beautiful state home. I am incredibly grateful to have found such an amazing dental office with thoughtful, caring, and supportive dentists and staff.",
+      "I am passionate about providing gentle personalized care along with patient education to help empower you to make informed decisions about your oral health. I look forward to building relationships with all of you while helping you achieve healthy, beautiful smiles.",
+      "Outside of work, I love spending time with my husband and our two kids. When I get a moment to myself, you can find me curled up with a good book or watching a movie or TV show.",
     ],
   },
   {
@@ -94,56 +111,72 @@ const people = [
     name: "Amaya",
     photo: "amaya.jpg",
     paras: [
-      "Amaya is a dental assistant and graduated from the West Coast College of Dental Assisting in 2022. She brings her advancing skills to make every visit go as smoothly as possible, and loves helping patients feel happy and confident in their smile. When not at the office, she enjoys country music concerts and camping with her boyfriend and their dog, Piper.",
+      "I am a dental assistant and graduated the West Coast College of Dental Assisting in 2022.",
+      "I bring my advancing skills and knowledge to make every visit go as smoothly as possible. I love to help patients be happy and confident in their smile.",
+      "When not at the office I enjoy country music concerts and camping with my boyfriend and dog, Piper.",
     ],
   },
   {
     name: "Jessica",
     photo: "jessica.jpg",
     paras: [
-      "Jessica, one of our dental assistants, joined Centennial in 2021 with over 15 years of experience. If you’re doing Invisalign with the office, you’ll probably see her the most; she enjoys getting to know patients, especially the ones she sees every six weeks for their Invisalign check-ins. Originally from San Jose, she moved to Washington in 2018, loves spending time with her family, and is always looking for a good movie recommendation.",
+      "I joined Centennial in 2021 with over 15 years of experience.",
+      "If you are doing Invisalign with our office, you'll probably see me the most! I really enjoy getting to know all of our patients, especially those I get to see every 6 weeks for their Invisalign check ins.",
+      "Originally from San Jose, I moved to Washington in 2018. I love spending time with my family am always looking for good movie recommendations!",
     ],
   },
   {
     name: "Kadi",
     photo: "kadi.jpg",
     paras: [
-      "Kadi joined Centennial’s assisting team in 2024 after graduating from the West Coast College of Dental Assisting. Her favorite part of each day is the time she spends with her patients; she loves getting to know people and working with those who have anxiety to give them the best possible visit. Outside the office, she enjoys time with close friends and loves getting outside.",
+      "I joined Centennial in 2024 after graduating from West Coast College of Dental Assisting.",
+      "My favorite part of each day is the time I get to spend with my patients. I love getting to know people and working with people with anxiety to have the best possible visit. My goal is to make you feel as comfortable as possible.",
+      "Outside of the office, I get to enjoy time with close friends and love to get outside!",
     ],
   },
   {
     name: "Yana",
     photo: "yana.jpg",
     paras: [
-      "Yana, a scheduling coordinator, started with the office in 2024, coming from a medical office and bringing her passion for community and patient care. She loves making our Kids’ Days fun for everyone, parents included, and enjoys designing letters and flyers and finding ways to reach out to the community. When she’s not at the office, she’s probably hosting a dinner party or traveling with her husband.",
+      "I started with the office in 2024. I come from a medical office and bring my passion for community and patient care.",
+      "I love to make our Kids' Days fun for everyone, including the parents. I have so much fun designing letters and flyers for our office and look forward to any time I get to reach out to the community.",
+      "When I'm not at the office, I am probably hosting a dinner party or traveling with my husband.",
     ],
   },
   {
     name: "Ciara",
     photo: "ciara.jpg",
     paras: [
-      "Ciara, a scheduling coordinator, joined the team in 2024, bringing 6 years of scheduling and insurance-billing expertise. She loves when a patient can leave smiling with all the information they need. A Washington native who grew up in Lake Stevens, she’s usually either in another country or at a country music concert when she’s not in the office.",
+      "I joined the team in 2024 and am bringing 6 years of scheduling and insurance billing expertise.",
+      "I love when a patient can leave smiling with all the information they need.",
+      "I am a native to Washington state and grew up in Lake Stevens. When not in the office, I am probably in another country or at a country music concert.",
     ],
   },
   {
     name: "Kayleen",
     photo: "kayleen.jpg",
     paras: [
-      "Kayleen, also a scheduling coordinator, joined the team in 2025 with 8 years of experience building trusting relationships. She comes from a background in personal banking, which gave her excellent organizational skills and a passion for helping people feel taken care of, and she’s often one of the first friendly faces patients meet. A Washington native who grew up in Lake Stevens, she enjoys playing board games with her husband and spending time with their dog, Millie.",
+      "I joined the team in 2025 and have 8 years of experience building trusting relationships. I come from a background of personal banking which has helped me develop excellent organizational skills and a passion for helping people feel comfortable and taken care of. I love bringing those skills into the office and being one of the first friendly faces our patients interact with.",
+      "I enjoy assisting patients with scheduling, answering questions, and helping make each visit as smooth and stress-free as possible.",
+      "I am a native to Washington state and grew up in Lake Stevens.  Outside of the office, I enjoy playing board games with my husband and spending time with our dog, Millie.",
     ],
   },
   {
     name: "Molly",
     photo: "molly.jpg",
     paras: [
-      "Molly, the office’s financial coordinator, joined Centennial in 2023 with three years of experience in dental billing, and also holds a Dental Assisting license. She is passionate about helping patients get the most out of their insurance benefits, and will work a claim as long as it takes; her favorite calls to make are the ones where insurance paid more than expected. She’s usually back in her office but loves visiting with patients in the lobby or on the phone. Outside work, she’s somewhere in the woods with her favorite dogs, Sunny and Dottie, or on a road trip.",
+      "I joined Centennial in 2023 with three years of experience in dental billing. I also hold a Dental Assisting license.",
+      "I am very passionate about helping patients get the most out of their insurance benefits. I will work on claims as long as it takes to get as much paid as possible. My favorite phone calls to make are the ones when I get to say that insurance paid more than we thought they would.",
+      "I am usually back in my office but love to visit with patients in the lobby or on the phone.",
+      "When not in the office, I am outside somewhere in the woods with my favorite dogs Sunny and Dottie, or on a road trip.",
     ],
   },
   {
     name: "Marne",
     photo: "marne.jpg",
     paras: [
-      "Marne, our business manager, loves our patients and is passionate about making sure they receive quality service and attention from start to finish. In her free time, she enjoys spending time with her husband and their kids, a nice glass of wine, and relaxing on a sunny beach.",
+      "I love our patients and am passionate about making sure they receive quality service and attention from start to finish.",
+      "In my free time, I enjoy spending time with my husband and our kids. I love a nice glass of wine and to relax on a sunny beach.",
     ],
   },
 ];
@@ -219,34 +252,38 @@ const reviews = [
     <h1 id="page-title">Meet our team</h1>
   </section>
 
-  <!-- The people: one flat flow, doctors first. The photos carry the hierarchy. -->
-  <section class="container section" aria-label="The team">
+  <!-- The people: one flat flow, doctors first. Doctors sit on pale-green
+       bands, staff on white — the background does the grouping quietly, the
+       way the original site alternates band colors. -->
+  <section aria-label="The team">
     <ul class="people" role="list">
       {
         people.map((person) => (
-          <li class="person">
-            {person.photo ? (
-              <img
-                class="person__photo"
-                src={img(person.photo)}
-                width="600"
-                height="800"
-                loading="lazy"
-                alt={person.name}
-              />
-            ) : (
-              <div
-                class="person__photo person__photo--placeholder"
-                aria-hidden="true"
-              >
-                <span>{person.name.charAt(0)}</span>
+          <li class={`person ${person.doctor ? "person--doctor" : ""}`}>
+            <div class="person__inner container">
+              {person.photo ? (
+                <img
+                  class="person__photo"
+                  src={img(person.photo)}
+                  width={person.doctor ? 1000 : 600}
+                  height={person.doctor ? 1074 : 800}
+                  loading="lazy"
+                  alt={person.name}
+                />
+              ) : (
+                <div
+                  class="person__photo person__photo--placeholder"
+                  aria-hidden="true"
+                >
+                  <span>{person.name.charAt(0)}</span>
+                </div>
+              )}
+              <div class="person__text">
+                <h2 class="person__name">{person.name}</h2>
+                {person.paras.map((p) => (
+                  <p class="person__bio">{p}</p>
+                ))}
               </div>
-            )}
-            <div class="person__text">
-              <h2 class="person__name">{person.name}</h2>
-              {person.paras.map((p) => (
-                <p class="person__bio">{p}</p>
-              ))}
             </div>
           </li>
         ))
@@ -396,17 +433,25 @@ const reviews = [
   }
 
   /* --- The people ------------------------------------------------------------ */
-  /* One flow, everyone in the same row format: large portrait beside the bio.
-     Uniform vertical rhythm keeps every photo evenly spaced. */
+  /* One flow, everyone a full-width band. Doctors on pale green, staff on
+     white: the background groups them without headings. Identical band padding
+     makes the spacing between every person exactly equal. */
   .people {
     list-style: none;
     padding: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-2xl);
+    margin: 0;
   }
 
   .person {
+    padding-block: var(--space-xl);
+    background: var(--color-surface);
+  }
+
+  .person--doctor {
+    background: var(--color-paper);
+  }
+
+  .person__inner {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-md);
@@ -415,14 +460,17 @@ const reviews = [
 
   .person__photo {
     width: 100%;
-    /* Portrait crop matched to the source headshots (mostly 3:4). Square-cropping
-       lopped the tops of heads (Dr. Greene's is a taller 2:3); object-position
-       biased upward keeps every face intact. */
+    /* Staff headshots are 3:4; shipped files are already framed correctly. */
     aspect-ratio: 3 / 4;
     object-fit: cover;
-    object-position: 50% 15%;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+  }
+
+  /* Doctors: the practice's own near-square crops (1000x1074), shipped
+     pre-cropped, so no CSS cropping at all. */
+  .person--doctor .person__photo {
+    aspect-ratio: 1000 / 1074;
   }
 
   .person__photo--placeholder {
@@ -570,11 +618,14 @@ const reviews = [
 
   /* --- Wider viewports (breakpoint 768, matching the shell) ----------------- */
   @media (min-width: 768px) {
-    .person {
-      /* Original-scale portraits: the photo column is ~460px of the 1120px
-         container, close to the source site's 559px-wide headshot display. */
+    .person__inner {
+      /* Original-scale portraits: staff ~460px; doctors a step larger. */
       grid-template-columns: 460px 1fr;
       gap: var(--space-xl);
+    }
+
+    .person--doctor .person__inner {
+      grid-template-columns: 500px 1fr;
     }
 
     .practice__grid {

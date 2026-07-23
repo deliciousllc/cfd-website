@@ -60,15 +60,7 @@ const slides = [
   },
 ];
 
-// Doctor headshots for the home teaser (same files the About page uses).
-const doctorCards = [
-  { name: "Dr. Eve Rutherford DDS", photo: b + "images/dr-eve-rutherford.jpg" },
-  { name: "Dr. Rachel Greene DDS", photo: b + "images/dr-rachel-greene.jpg" },
-  {
-    name: "Dr. Samiksha Gulrajani DMD",
-    photo: b + "images/dr-samiksha-gulrajani.jpg",
-  },
-];
+
 
 // Google Maps link to the verbatim practice address (products.md: no map is
 // stated on the source site, so this is a redesign-added convenience link, not
@@ -280,32 +272,6 @@ const hours = [
                 alt={s.alt}
               />
               <span class="tile__name">{s.name}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <!-- The doctors -->
-  <section class="section container" aria-labelledby="doctors-title">
-    <div class="section__head">
-      <h2 id="doctors-title">The doctors</h2>
-      <a class="section__link" href={aboutUrl}>Meet the whole team</a>
-    </div>
-    <ul class="doctor-cards" role="list">
-      {
-        doctorCards.map((d) => (
-          <li class="doctor-card">
-            <a href={aboutUrl}>
-              <img
-                src={d.photo}
-                width="600"
-                height="800"
-                loading="lazy"
-                alt={d.name}
-              />
-              <span class="doctor-card__name">{d.name}</span>
             </a>
           </li>
         ))
@@ -565,80 +531,6 @@ const hours = [
 
   .lightbox__close:hover {
     background: rgba(242, 244, 238, 0.14);
-  }
-
-  /* --- The doctors (home teaser) --------------------------------------------- */
-  .doctor-cards {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-  }
-
-  .doctor-card a {
-    display: block;
-    text-decoration: none;
-  }
-
-  .doctor-card img {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    object-position: 50% 15%;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-  }
-
-  .doctor-card__name {
-    display: block;
-    margin-top: var(--space-sm);
-    font-family: var(--font-ui);
-    font-size: var(--text-h3);
-    font-weight: 600;
-    color: var(--color-ink);
-  }
-
-  /* --- Service tiles (image + name, per the original site) ------------------- */
-  .tiles {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-lg) var(--space-md);
-  }
-
-  .tile {
-    display: block;
-    text-decoration: none;
-  }
-
-  .tile img {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    transition: box-shadow 0.15s ease;
-  }
-
-  .tile:hover img {
-    box-shadow: 0 6px 18px rgba(55, 37, 50, 0.18);
-  }
-
-  .tile__name {
-    display: block;
-    margin-top: var(--space-xs);
-    font-family: var(--font-ui);
-    font-size: var(--text-base);
-    font-weight: 600;
-    color: var(--color-green);
-  }
-
-  .tile:hover .tile__name {
-    color: var(--color-green-deep);
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
   }
 
   /* --- Reviews -------------------------------------------------------------- */
