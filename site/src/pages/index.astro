@@ -533,6 +533,48 @@ const hours = [
     background: rgba(242, 244, 238, 0.14);
   }
 
+  /* --- Service tiles (image + name, per the original site) ------------------- */
+  .tiles {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg) var(--space-md);
+  }
+
+  .tile {
+    display: block;
+    text-decoration: none;
+  }
+
+  .tile img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.15s ease;
+  }
+
+  .tile:hover img {
+    box-shadow: 0 6px 18px rgba(55, 37, 50, 0.18);
+  }
+
+  .tile__name {
+    display: block;
+    margin-top: var(--space-xs);
+    font-family: var(--font-ui);
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-green);
+  }
+
+  .tile:hover .tile__name {
+    color: var(--color-green-deep);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
   /* --- Reviews -------------------------------------------------------------- */
   .reviews {
     background: var(--color-paper);
