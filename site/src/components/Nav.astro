@@ -91,7 +91,9 @@ const tel = "tel:360-568-6017";
   }
 
   .nav__logo {
-    height: 44px;
+    /* The logo carries the practice name + tagline as baked-in artwork; at 44px
+       it was illegible. Sized up so the wordmark actually reads. */
+    height: 60px;
     width: auto;
   }
 
@@ -136,6 +138,10 @@ const tel = "tel:360-568-6017";
       grid-template-columns: auto 1fr auto;
       grid-template-areas: "brand links call";
       column-gap: var(--space-lg);
+    }
+
+    .nav__logo {
+      height: 76px;
     }
 
     .nav__links {

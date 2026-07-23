@@ -180,3 +180,7 @@ An existing `.gitignore` in the repo root already excluded `.superpowers/` (pre-
 | File | Source | Date | Method | Result |
 |---|---|---|---|---|
 | logo-palette-resample.md | assets/logo.jpg | 2026-07-22 | ImageMagick (`magick -colors 12 -unique-colors` whole-image; `magick -crop 236x264+0+0` then `-colors 7 -unique-colors` on the crop) | OK — re-ran the whole-image quantize and trees-only crop that Task 4's report described narratively but never wrote to this folder. Reproduced the report's claimed hex values exactly: `#372732`, `#5D6D4E`, `#B5B872`, `#EEF1EB` (whole-image) and `#3E2D36`, `#5C704A`, `#B0B471`, `#B9BB9C` (crop), on top of the `#B0B0A1` already logged above. See `logo-palette-resample.md` for full commands and raw output. |
+
+## Follow-up capture (2026-07-22, home-page revision)
+| carousel/hot-air-balloon.jpg | https://static.wixstatic.com/media/856d6c_304dbc9970c043efac4c35ca5d182eb0~mv2.jpg | 2026-07-22 | curl (Wix CDN, transform stripped) | Source homepage carousel slide — building front + hot air balloon. Optimized to site/public/images/building-balloon.jpg |
+| carousel/go-huskies.jpg | https://static.wixstatic.com/media/856d6c_8eadc5bdc4be4baea71e9ae117b2f304~mv2.jpg | 2026-07-22 | curl (Wix CDN, transform stripped) | Source homepage carousel slide — team in UW Huskies gear in office. Optimized to site/public/images/team-huskies.jpg |

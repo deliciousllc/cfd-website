@@ -12,6 +12,29 @@ const buildingImg = b + "images/building.jpg";
 
 const tel = "tel:360-568-6017";
 
+// Personality carousel — the practice's own homepage-carousel photos, recaptured
+// from the source site (capture-log.md). Captions are factual/descriptive only:
+// the team photo shows staff in UW gear; the second is the building at the
+// verbatim address. No invented claims.
+const gallery = [
+  {
+    src: b + "images/team-huskies.jpg",
+    w: 1600,
+    h: 1200,
+    alt:
+      "The Centennial Family Dentistry team, five staff members in University of Washington Huskies shirts, together in the office.",
+    caption: "The team, decked out in Huskies purple.",
+  },
+  {
+    src: b + "images/building-balloon.jpg",
+    w: 1600,
+    h: 1205,
+    alt:
+      "The front of the Centennial Family Dentistry building on a clear day, a hot air balloon drifting in the sky above.",
+    caption: "Our door at 133 Maple Ave, Snohomish.",
+  },
+];
+
 // Google Maps link to the verbatim practice address (products.md: no map is
 // stated on the source site, so this is a redesign-added convenience link, not
 // a quoted fact — the address string itself is verbatim).
@@ -98,28 +121,30 @@ const hours = [
   description="Centennial Family Dentistry. We are a Snohomish dentist here to provide a dental home focused on prevention, education, compassion and meticulous dental care"
 >
   <!-- Hero -->
-  <section class="hero container" aria-labelledby="hero-title">
-    <div class="hero__text">
-      <p class="eyebrow">Family dentistry in Snohomish, Washington</p>
-      <h1 id="hero-title">Centennial Family Dentistry</h1>
-      <p class="hero__lede">
-        A Snohomish dental home for anyone who has been putting the dentist off.
-        You’ll know the price before you’re in the chair, and you’ll know your
-        dentist by name.
-      </p>
-      <p class="hero__doctors">
-        The office of Dr. Eve Rutherford DDS, Dr. Rachel Greene DDS, and Dr.
-        Samiksha Gulrajani DMD.
-      </p>
-      <a class="btn-call hero__cta" href={tel}>Call 360-568-6017</a>
-    </div>
-    <div class="hero__media">
-      <img
-        src={buildingImg}
-        width="1600"
-        height="900"
-        alt="The Centennial Family Dentistry building at 133 Maple Ave in Snohomish, Washington."
-      />
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__inner container">
+      <div class="hero__text">
+        <p class="eyebrow">Family dentistry in Snohomish, Washington</p>
+        <h1 id="hero-title">Centennial Family Dentistry</h1>
+        <p class="hero__lede">
+          A Snohomish dental home for anyone who has been putting the dentist
+          off. You’ll know the price before you’re in the chair, and you’ll know
+          your dentist by name.
+        </p>
+        <p class="hero__doctors">
+          The office of Dr. Eve Rutherford DDS, Dr. Rachel Greene DDS, and Dr.
+          Samiksha Gulrajani DMD.
+        </p>
+        <a class="hero__cta" href={tel}>Call 360-568-6017</a>
+      </div>
+      <div class="hero__media">
+        <img
+          src={buildingImg}
+          width="1600"
+          height="900"
+          alt="The Centennial Family Dentistry building at 133 Maple Ave in Snohomish, Washington."
+        />
+      </div>
     </div>
   </section>
 
@@ -138,6 +163,34 @@ const hours = [
               <p class="card__body">{s.body}</p>
               <span class="card__more" aria-hidden="true">See details &amp; pricing &rarr;</span>
             </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- Personality carousel: the people and the place -->
+  <section class="gallery" aria-labelledby="gallery-title">
+    <div class="gallery__head container">
+      <h2 id="gallery-title">A neighborhood practice, not a chain</h2>
+      <p class="gallery__intro">
+        The same faces every visit, in a building you can find on Maple Ave.
+      </p>
+    </div>
+    <ul class="gallery__track" role="list">
+      {
+        gallery.map((g) => (
+          <li class="gallery__slide">
+            <figure class="gallery__figure">
+              <img
+                src={g.src}
+                width={g.w}
+                height={g.h}
+                loading="lazy"
+                alt={g.alt}
+              />
+              <figcaption class="gallery__caption">{g.caption}</figcaption>
+            </figure>
           </li>
         ))
       }
@@ -249,36 +302,136 @@ const hours = [
     color: var(--color-green-deep);
   }
 
-  /* --- Hero ----------------------------------------------------------------- */
+  /* --- Hero: drenched evergreen -------------------------------------------- */
   .hero {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    /* Full-bleed band: the practice's deep green carries the whole hero, so the
+       page opens with their color, not a wall of white. */
+    background: var(--color-green-deep);
+    color: var(--color-paper);
     padding-block: var(--space-2xl);
   }
 
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .hero .eyebrow {
+    /* Pale sage keeps the brand's tree-green warmth but clears AA on the deep
+       green band (4.98:1); full sage would fail small-text contrast (3.46). */
+    color: #cdd6b0;
+  }
+
+  .hero__text h1 {
+    color: var(--color-paper);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
   .hero__lede {
-    font-family: var(--font-display);
     font-size: var(--text-lg);
     line-height: var(--leading-body);
-    color: var(--color-ink);
+    color: var(--color-paper);
     margin-top: var(--space-md);
   }
 
   .hero__doctors {
     font-size: var(--text-base);
-    color: var(--color-ink-muted);
+    /* Cream held at full strength for AA on green; hierarchy comes from size. */
+    color: var(--color-paper);
+    opacity: 0.82;
     margin-top: var(--space-md);
   }
 
+  /* Cream CTA: the green button would vanish on the green band, so in the hero
+     the call-to-action inverts to a light chip with dark ink. */
   .hero__cta {
+    display: inline-block;
     margin-top: var(--space-lg);
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: var(--text-base);
+    border-radius: var(--radius);
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), background 0.15s ease;
+  }
+
+  .hero__cta:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
   }
 
   .hero__media img {
     width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    /* A thin cream frame lifts the photo off the green so it reads as a
+       deliberate feature, not a hole in the band. */
+    border: 6px solid var(--color-paper);
+    box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.55);
+  }
+
+  /* --- Personality carousel ------------------------------------------------- */
+  .gallery {
+    padding-block: var(--space-2xl);
+    background: var(--color-paper);
+    border-block: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .gallery__head {
+    margin-bottom: var(--space-lg);
+  }
+
+  .gallery__intro {
+    font-size: var(--text-lg);
+    color: var(--color-ink-muted);
+    margin-top: var(--space-sm);
+  }
+
+  .gallery__track {
+    list-style: none;
+    padding: 0 var(--gutter) var(--space-xs);
+    margin: 0;
+    display: flex;
+    gap: var(--space-md);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .gallery__slide {
+    flex: 0 0 86%;
+    max-width: 640px;
+    scroll-snap-align: center;
+  }
+
+  .gallery__figure {
+    margin: 0;
+  }
+
+  .gallery__figure img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+  }
+
+  .gallery__caption {
+    margin-top: var(--space-sm);
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink-muted);
   }
 
   /* --- Service cards -------------------------------------------------------- */
@@ -438,8 +591,8 @@ const hours = [
     margin-top: var(--space-sm);
   }
 
-  /* --- Wider viewports ------------------------------------------------------ */
-  @media (min-width: 700px) {
+  /* --- Wider viewports (768px matches the shell nav + other pages) --------- */
+  @media (min-width: 768px) {
     .cards {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -451,16 +604,25 @@ const hours = [
     .visit {
       grid-template-columns: 1fr 1fr;
     }
+
+    .gallery__slide {
+      flex-basis: 46%;
+    }
   }
 
   @media (min-width: 900px) {
-    .hero {
-      grid-template-columns: 1.1fr 1fr;
-      align-items: center;
+    .hero__inner {
+      grid-template-columns: 1.05fr 1fr;
     }
 
     .cards {
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__cta {
+      transition: none;
     }
   }
 </style>

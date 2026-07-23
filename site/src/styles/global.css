@@ -36,8 +36,11 @@
   --color-bg: var(--color-surface);
 
   /* Typography — fonts */
-  --font-display: "Lora", Georgia, "Times New Roman", serif;
+  /* Barlow is the practice's own type (captured computed style of the source site:
+     "barlow-medium, barlow, sans-serif"). Display and body share it; hierarchy
+     comes from weight + scale, not a serif/sans split. */
   --font-ui: "Barlow", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-ui);
   --font-heading: var(--font-display);
   --font-body: var(--font-ui);
 
