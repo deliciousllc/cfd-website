@@ -8,22 +8,18 @@ const base = import.meta.env.BASE_URL;
 const b = base.endsWith("/") ? base : base + "/";
 const servicesUrl = b + "services/";
 const aboutUrl = b + "about/";
-const buildingImg = b + "images/building.jpg";
 
 const tel = "tel:360-568-6017";
 
-// Personality carousel — the practice's own homepage-carousel photos, recaptured
-// from the source site (capture-log.md). Captions are factual/descriptive only:
-// the team photo shows staff in UW gear; the second is the building at the
-// verbatim address. No invented claims.
-const gallery = [
+// Hero carousel — mirrors the source site, whose hero is a cycling photo
+// carousel. Slides are the practice's own photos (capture-log.md), people first.
+const slides = [
   {
     src: b + "images/team-huskies.jpg",
     w: 1600,
     h: 1200,
     alt:
       "The Centennial Family Dentistry team, five staff members in University of Washington Huskies shirts, together in the office.",
-    caption: "The team, decked out in Huskies purple.",
   },
   {
     src: b + "images/building-balloon.jpg",
@@ -31,7 +27,23 @@ const gallery = [
     h: 1205,
     alt:
       "The front of the Centennial Family Dentistry building on a clear day, a hot air balloon drifting in the sky above.",
-    caption: "Our door at 133 Maple Ave, Snohomish.",
+  },
+  {
+    src: b + "images/building.jpg",
+    w: 1600,
+    h: 900,
+    alt:
+      "The Centennial Family Dentistry building at 133 Maple Ave in Snohomish, Washington.",
+  },
+];
+
+// Doctor headshots for the home teaser (same files the About page uses).
+const doctorCards = [
+  { name: "Dr. Eve Rutherford DDS", photo: b + "images/dr-eve-rutherford.jpg" },
+  { name: "Dr. Rachel Greene DDS", photo: b + "images/dr-rachel-greene.jpg" },
+  {
+    name: "Dr. Samiksha Gulrajani DMD",
+    photo: b + "images/dr-samiksha-gulrajani.jpg",
   },
 ];
 
@@ -62,7 +74,7 @@ const services = [
     name: "Cosmetic",
     anchor: "cosmetic",
     body:
-      "Whitening, veneers, and Invisalign to renew your smile — plus Botox and fillers, whether or not you’re a patient here.",
+      "Whitening, veneers, and Invisalign to renew your smile, plus Botox and fillers, whether or not you’re a patient here.",
   },
   {
     name: "Sleep & TMJ",
@@ -76,13 +88,6 @@ const services = [
     body:
       "3D-printed night guards made in-house, gentle laser treatment, the Willo brushing system, and themed Kids’ Days for younger patients.",
   },
-];
-
-// Three doctors — names and credentials verbatim from products.md (gotcha 11).
-const doctors = [
-  "Dr. Eve Rutherford DDS",
-  "Dr. Rachel Greene DDS",
-  "Dr. Samiksha Gulrajani DMD",
 ];
 
 // 2–3 patient reviews, verbatim from products.md (gotcha 12: typos preserved,
@@ -117,7 +122,7 @@ const hours = [
 ---
 
 <BaseLayout
-  title="Home | Centennial Family Dentistry Snohomish — Concept Redesign"
+  title="Home | Centennial Family Dentistry Snohomish (Concept Redesign)"
   description="Centennial Family Dentistry. We are a Snohomish dentist here to provide a dental home focused on prevention, education, compassion and meticulous dental care"
 >
   <!-- Hero -->
@@ -127,23 +132,64 @@ const hours = [
         <p class="eyebrow">Family dentistry in Snohomish, Washington</p>
         <h1 id="hero-title">Centennial Family Dentistry</h1>
         <p class="hero__lede">
-          A Snohomish dental home for anyone who has been putting the dentist
-          off. You’ll know the price before you’re in the chair, and you’ll know
-          your dentist by name.
+          A dental home focused on prevention, education, compassion, and
+          meticulous dental care.
         </p>
         <p class="hero__doctors">
           The office of Dr. Eve Rutherford DDS, Dr. Rachel Greene DDS, and Dr.
           Samiksha Gulrajani DMD.
         </p>
-        <a class="hero__cta" href={tel}>Call 360-568-6017</a>
       </div>
-      <div class="hero__media">
-        <img
-          src={buildingImg}
-          width="1600"
-          height="900"
-          alt="The Centennial Family Dentistry building at 133 Maple Ave in Snohomish, Washington."
-        />
+
+      <div class="carousel" data-carousel>
+        <ul class="carousel__slides" role="list">
+          {
+            slides.map((s, i) => (
+              <li
+                class={`carousel__slide${i === 0 ? " is-active" : ""}`}
+                data-slide
+              >
+                <img
+                  src={s.src}
+                  width={s.w}
+                  height={s.h}
+                  alt={s.alt}
+                  loading={i === 0 ? "eager" : "lazy"}
+                />
+              </li>
+            ))
+          }
+        </ul>
+        <div class="carousel__controls">
+          <button
+            class="carousel__btn"
+            type="button"
+            data-prev
+            aria-label="Previous photo"
+          >
+            &larr;
+          </button>
+          <div class="carousel__dots" data-dots>
+            {
+              slides.map((_, i) => (
+                <button
+                  class={`carousel__dot${i === 0 ? " is-active" : ""}`}
+                  type="button"
+                  data-dot={i}
+                  aria-label={`Photo ${i + 1} of ${slides.length}`}
+                />
+              ))
+            }
+          </div>
+          <button
+            class="carousel__btn"
+            type="button"
+            data-next
+            aria-label="Next photo"
+          >
+            &rarr;
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -169,48 +215,30 @@ const hours = [
     </ul>
   </section>
 
-  <!-- Personality carousel: the people and the place -->
-  <section class="gallery" aria-labelledby="gallery-title">
-    <div class="gallery__head container">
-      <h2 id="gallery-title">A neighborhood practice, not a chain</h2>
-      <p class="gallery__intro">
-        The same faces every visit, in a building you can find on Maple Ave.
-      </p>
+  <!-- The doctors -->
+  <section class="section container" aria-labelledby="doctors-title">
+    <div class="section__head">
+      <h2 id="doctors-title">The doctors</h2>
+      <a class="section__link" href={aboutUrl}>Meet the whole team</a>
     </div>
-    <ul class="gallery__track" role="list">
+    <ul class="doctor-cards" role="list">
       {
-        gallery.map((g) => (
-          <li class="gallery__slide">
-            <figure class="gallery__figure">
+        doctorCards.map((d) => (
+          <li class="doctor-card">
+            <a href={aboutUrl}>
               <img
-                src={g.src}
-                width={g.w}
-                height={g.h}
+                src={d.photo}
+                width="600"
+                height="800"
                 loading="lazy"
-                alt={g.alt}
+                alt={d.name}
               />
-              <figcaption class="gallery__caption">{g.caption}</figcaption>
-            </figure>
+              <span class="doctor-card__name">{d.name}</span>
+            </a>
           </li>
         ))
       }
     </ul>
-  </section>
-
-  <!-- Meet the doctors teaser -->
-  <section class="section container" aria-labelledby="doctors-title">
-    <div class="doctors">
-      <h2 id="doctors-title">The people who’ll be treating you</h2>
-      <p class="doctors__intro">
-        Three dentists, and every hygienist, assistant, and coordinator behind
-        them, have a name and a face here. Dr. Greene grew up in Snohomish and
-        came home to practice.
-      </p>
-      <ul class="doctors__list" role="list">
-        {doctors.map((d) => <li class="doctors__name">{d}</li>)}
-      </ul>
-      <a class="section__link" href={aboutUrl}>Meet the doctors &amp; staff</a>
-    </div>
   </section>
 
   <!-- Reviews strip -->
@@ -257,7 +285,6 @@ const hours = [
         <p class="visit__line">
           <a href={tel}>Phone: 360-568-6017</a>
         </p>
-        <a class="btn-call visit__cta" href={tel}>Call 360-568-6017</a>
       </div>
     </div>
   </section>
@@ -345,93 +372,116 @@ const hours = [
     margin-top: var(--space-md);
   }
 
-  /* Cream CTA: the green button would vanish on the green band, so in the hero
-     the call-to-action inverts to a light chip with dark ink. */
-  .hero__cta {
-    display: inline-block;
-    margin-top: var(--space-lg);
-    padding: var(--space-sm) var(--space-lg);
-    background: var(--color-paper);
-    color: var(--color-ink);
-    font-family: var(--font-ui);
-    font-weight: 700;
-    font-size: var(--text-base);
-    border-radius: var(--radius);
-    text-decoration: none;
-    box-shadow: var(--shadow);
-    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), background 0.15s ease;
+  /* --- Hero carousel --------------------------------------------------------- */
+  .carousel {
+    position: relative;
   }
 
-  .hero__cta:hover {
-    background: #ffffff;
-    transform: translateY(-1px);
-  }
-
-  .hero__media img {
-    width: 100%;
+  .carousel__slides {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
     aspect-ratio: 4 / 3;
-    object-fit: cover;
     border-radius: var(--radius);
-    /* A thin cream frame lifts the photo off the green so it reads as a
-       deliberate feature, not a hole in the band. */
-    border: 6px solid var(--color-paper);
+    overflow: hidden;
     box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.55);
   }
 
-  /* --- Personality carousel ------------------------------------------------- */
-  .gallery {
-    padding-block: var(--space-2xl);
-    background: var(--color-paper);
-    border-block: 1px solid var(--color-border);
-    overflow: hidden;
+  .carousel__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
   }
 
-  .gallery__head {
-    margin-bottom: var(--space-lg);
+  .carousel__slide.is-active {
+    opacity: 1;
   }
 
-  .gallery__intro {
-    font-size: var(--text-lg);
-    color: var(--color-ink-muted);
+  .carousel__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .carousel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
     margin-top: var(--space-sm);
   }
 
-  .gallery__track {
-    list-style: none;
-    padding: 0 var(--gutter) var(--space-xs);
-    margin: 0;
+  .carousel__btn {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--color-paper);
+    font-size: var(--text-lg);
+    line-height: 1;
+    padding: var(--space-2xs) var(--space-xs);
+    min-height: 44px;
+    min-width: 44px;
+    cursor: pointer;
+    border-radius: var(--radius);
+  }
+
+  .carousel__btn:hover {
+    background: rgba(242, 244, 238, 0.14);
+  }
+
+  .carousel__dots {
     display: flex;
-    gap: var(--space-md);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+    gap: var(--space-xs);
   }
 
-  .gallery__slide {
-    flex: 0 0 86%;
-    max-width: 640px;
-    scroll-snap-align: center;
+  .carousel__dot {
+    appearance: none;
+    border: none;
+    padding: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(242, 244, 238, 0.45);
+    cursor: pointer;
   }
 
-  .gallery__figure {
-    margin: 0;
+  .carousel__dot.is-active {
+    background: var(--color-paper);
   }
 
-  .gallery__figure img {
+  /* --- The doctors (home teaser) --------------------------------------------- */
+  .doctor-cards {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .doctor-card a {
+    display: block;
+    text-decoration: none;
+  }
+
+  .doctor-card img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
+    object-position: 50% 15%;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
   }
 
-  .gallery__caption {
+  .doctor-card__name {
+    display: block;
     margin-top: var(--space-sm);
     font-family: var(--font-ui);
-    font-size: var(--text-sm);
+    font-size: var(--text-h3);
     font-weight: 600;
-    color: var(--color-ink-muted);
+    color: var(--color-ink);
   }
 
   /* --- Service cards -------------------------------------------------------- */
@@ -484,29 +534,6 @@ const hours = [
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--color-green);
-  }
-
-  /* --- Doctors teaser ------------------------------------------------------- */
-  .doctors__intro {
-    font-size: var(--text-lg);
-    margin-top: var(--space-sm);
-    margin-bottom: var(--space-lg);
-  }
-
-  .doctors__list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm) var(--space-lg);
-    margin-bottom: var(--space-lg);
-  }
-
-  .doctors__name {
-    font-family: var(--font-display);
-    font-size: var(--text-h3);
-    font-weight: 600;
-    color: var(--color-ink);
   }
 
   /* --- Reviews -------------------------------------------------------------- */
@@ -605,14 +632,19 @@ const hours = [
       grid-template-columns: 1fr 1fr;
     }
 
-    .gallery__slide {
-      flex-basis: 46%;
+    .doctor-cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .carousel__slides {
+      aspect-ratio: 16 / 9;
     }
   }
 
   @media (min-width: 900px) {
     .hero__inner {
-      grid-template-columns: 1.05fr 1fr;
+      grid-template-columns: 1fr 1.6fr;
+      align-items: center;
     }
 
     .cards {
@@ -621,8 +653,66 @@ const hours = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__cta {
+    .carousel__slide {
       transition: none;
     }
   }
 </style>
+
+<script>
+  // Hero carousel: auto-advance with manual controls. Pauses on hover/focus and
+  // when the tab is hidden; no autoplay for users who prefer reduced motion.
+  const root = document.querySelector("[data-carousel]");
+  if (root) {
+    const slides = [...root.querySelectorAll("[data-slide]")];
+    const dots = [...root.querySelectorAll("[data-dot]")];
+    let index = 0;
+    let timer: number | undefined;
+
+    const show = (i: number) => {
+      index = (i + slides.length) % slides.length;
+      slides.forEach((s, n) => s.classList.toggle("is-active", n === index));
+      dots.forEach((d, n) => d.classList.toggle("is-active", n === index));
+    };
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const stop = () => {
+      if (timer !== undefined) {
+        clearInterval(timer);
+        timer = undefined;
+      }
+    };
+    const start = () => {
+      if (reducedMotion || timer !== undefined) return;
+      timer = window.setInterval(() => show(index + 1), 5000);
+    };
+
+    root.querySelector("[data-prev]")?.addEventListener("click", () => {
+      show(index - 1);
+      stop();
+    });
+    root.querySelector("[data-next]")?.addEventListener("click", () => {
+      show(index + 1);
+      stop();
+    });
+    dots.forEach((d, n) =>
+      d.addEventListener("click", () => {
+        show(n);
+        stop();
+      })
+    );
+
+    root.addEventListener("mouseenter", stop);
+    root.addEventListener("mouseleave", start);
+    root.addEventListener("focusin", stop);
+    root.addEventListener("focusout", start);
+    document.addEventListener("visibilitychange", () =>
+      document.hidden ? stop() : start()
+    );
+
+    start();
+  }
+</script>

@@ -197,3 +197,20 @@ Tasks 10–12 against these rules — not here.)
 
   Page jobs are set by the three-page pitch scope; the tiering principle
   (brand constant + one page job each) is `[INFERRED]`.
+
+## Anti-patterns — owner corrections (2026-07-22, Rev 2)
+
+Added after owner review of the first built pages; these join the original anti-patterns above.
+
+- **No AI-marketing cadence.** The "you'll know X, and you'll know Y" parallel construction,
+  and any punchy trailer-voice lede, is banned. `[RATIFIED]` — owner: "a pattern in the
+  cadence... so blatantly AI-sounding."
+- **No "in the chair" / "before you sit down."** Chair-adjacent menace reads as rodeo, not
+  reassurance. `[RATIFIED]`
+- **No ledes that restate the section title.** "Here's what things cost" under "Services &
+  Pricing" adds nothing. Either say something new or say nothing. `[RATIFIED]`
+- **Phone is information, not a pitch.** "Phone: 360-568-6017" as plain text, once at the top
+  plus footer/contact; repeated "Call" buttons read personal-injury-firm. `[RATIFIED]`
+- **No em dashes in prose.** Use commas, colons, semicolons, or periods. `[RATIFIED]`
+- **Default to the practice's own published wording** when a line is needed; invent as little
+  as possible. `[RATIFIED]`

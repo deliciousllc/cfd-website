@@ -8,7 +8,16 @@ Site: Astro project in `site/` — dev: `cd site && npm run dev`; deploys to Git
 ## Hard rules (every session, every model)
 - **Never improvise facts.** Prices, hours, names, contact details come verbatim from
   `brand/products.md` (check its Locked Terminology & Fact Gotchas). Not there → ask.
-- **Primary CTA is Call (`tel:360-568-6017`) everywhere.** No forms, no booking flows.
+- **Phone presentation (owner-corrected 2026-07-22): understated, not promotional.** The number
+  appears as plain text "Phone: 360-568-6017" once in the nav and in the footer contact block,
+  plus inline where genuinely informational (pricing note, contact sections). NO repeated
+  "Call" buttons — they read as personal-injury-firm, not high-end dental. No forms, no
+  booking flows.
+- **Copy register (owner-corrected 2026-07-22): plain statements, never marketing hooks.**
+  Banned: "in the chair", "before you sit down", the "you'll know X, and you'll know Y"
+  parallel-cadence pattern, ledes that restate the section title ("Here's what things cost"
+  under Services & Pricing), and em dashes in prose. When in doubt, use the practice's own
+  published wording.
 - **No fabricated practice content** — no invented testimonials, copy, or stock-photo padding.
 - **Corrections go into files the same session** (facts → products.md gotchas; rules → the
   owning driver/handoff).

@@ -44,7 +44,7 @@ const tel = "tel:360-568-6017";
       />
     </a>
 
-    <a class="nav__call btn-call" href={tel}>Call 360-568-6017</a>
+    <a class="nav__call" href={tel}>Phone: 360-568-6017</a>
 
     <nav class="nav__links" aria-label="Primary">
       {links.map((link) => {
@@ -100,6 +100,19 @@ const tel = "tel:360-568-6017";
   .nav__call {
     grid-area: call;
     justify-self: end;
+    font-family: var(--font-ui);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+    padding: var(--space-2xs) 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .nav__call:hover {
+    color: var(--color-green);
   }
 
   .nav__links {

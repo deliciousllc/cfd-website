@@ -163,3 +163,14 @@ Carry forward; do not let these silently become rules.
 ## Owner checkpoint — 2026-07-22
 
 Project lead reviewed the inferred-claim register (V1–V9) at the Task 7 gut-check. Voice lean **confirmed to build on**: "Steadying / plain-spoken / named-people," answering anxiety rather than selling (V1). Scope is plausibility/direction only; V1–V9 remain tagged hypotheses until the practice ratifies. V2 (published prices as deliberate transparency stance vs. template accident) is flagged to ask the practice directly at pitch time; the pitch proceeds either way.
+
+## Owner correction round — 2026-07-22 (post-build)
+
+The first built pages passed the original QA gates but failed the owner's ear: the hero lede
+("You'll know the price before you're in the chair, and you'll know your dentist by name"),
+the About lede ("...before you sit down"), and "Here's what things cost" were all rejected as
+AI-cadence marketing voice. Root cause: the voice family banned hype and fear but did not ban
+*cadence patterns* or title-restating ledes, so copy optimized toward punchy parallel hooks.
+Six new `[RATIFIED]` anti-patterns added to voice.md (Rev 2). Call-button repetition was also
+rejected ("this isn't a personal injury law firm"): phone is now presented as plain
+"Phone: ..." text, once in the nav plus footer/contact. CLAUDE.md hard rules updated to match.

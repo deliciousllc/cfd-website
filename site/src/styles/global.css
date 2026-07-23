@@ -179,30 +179,6 @@ a:hover {
   padding-inline: var(--gutter);
 }
 
-/* --- Shared button (green filled = the single primary CTA: Call) ------------- */
-.btn-call {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2xs);
-  min-height: 44px;
-  padding: var(--space-2xs) var(--space-md);
-  background: var(--color-green);
-  color: var(--color-surface);
-  font-family: var(--font-ui);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: var(--radius);
-  white-space: nowrap;
-}
-
-.btn-call:hover,
-.btn-call:focus {
-  background: var(--color-green-deep);
-  color: var(--color-surface);
-}
-
 /* --- Reduced motion ---------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   *,

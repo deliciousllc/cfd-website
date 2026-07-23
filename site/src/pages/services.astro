@@ -56,7 +56,7 @@ const groups = [
     id: "restorative",
     name: "Restorative",
     intro:
-      "When a tooth is sore or damaged, this is how we get it healthy again — fillings, crowns, and extractions.",
+      "When a tooth is sore or damaged, this is how we get it healthy again: fillings, crowns, and extractions.",
     services: [
       {
         name: "Fillings, crowns, and extractions",
@@ -72,7 +72,7 @@ const groups = [
     id: "cosmetic",
     name: "Cosmetic",
     intro:
-      "Renewing your smile — whitening, Invisalign, veneers, and teeth-colored fillings (priced under Restorative above). We also offer Botox and fillers, and you don’t have to be a patient here to book them.",
+      "Renewing your smile: whitening, Invisalign, veneers, and teeth-colored fillings (priced under Restorative above). We also offer Botox and fillers, and you don’t have to be a patient here to book them.",
     services: [
       {
         name: "Teeth whitening",
@@ -96,7 +96,7 @@ const groups = [
       {
         name: "Botox and fillers",
         body:
-          "We offer both medical and cosmetic Botox — for smoothing fine lines or easing jaw tension. You do not have to be a dental patient to schedule these.",
+          "We offer both medical and cosmetic Botox, for smoothing fine lines or easing jaw tension. You do not have to be a dental patient to schedule these.",
         prices: [
           { label: "Botox", price: "$13–$14 per unit", contested: true },
           { label: "Filler", price: "$650 per syringe" },
@@ -118,7 +118,7 @@ const groups = [
       {
         name: "Sleep apnea",
         body:
-          "During every exam, our doctors look for signs of sleep apnea, like a small airway, and can set you up with an at-home sleep study — usually cheaper and more comfortable than an in-lab study. If an oral sleep appliance will help, we make it here. We work closely with medical professionals for an accurate diagnosis, and we’re a good option if you’re looking for an alternative to CPAP.",
+          "During every exam, our doctors look for signs of sleep apnea, like a small airway, and can set you up with an at-home sleep study, usually cheaper and more comfortable than an in-lab study. If an oral sleep appliance will help, we make it here. We work closely with medical professionals for an accurate diagnosis, and we’re a good option if you’re looking for an alternative to CPAP.",
         prices: [
           { label: "At-home sleep test", price: "$250" },
           { label: "Oral sleep device", price: "$2,500" },
@@ -149,7 +149,7 @@ const groups = [
       {
         name: "3D printing",
         body:
-          "We fabricate custom night guards, onlays, and more in-house with 3D printing — faster turnaround, fewer appointments, and restorations tailored to your bite.",
+          "We fabricate custom night guards, onlays, and more in-house with 3D printing: faster turnaround, fewer appointments, and restorations tailored to your bite.",
       },
       {
         name: "Laser dentistry",
@@ -160,13 +160,13 @@ const groups = [
       {
         name: "Willo toothbrush",
         body:
-          "An automated brushing system that cleans all sides of your teeth at once — helpful if brushing technique or time is a struggle.",
+          "An automated brushing system that cleans all sides of your teeth at once, helpful if brushing technique or time is a struggle.",
         link: { url: willoUrl, label: "More information on Willo" },
       },
       {
         name: "Kids’ Days",
         body:
-          "A few times each month we set aside days just for our younger patients, with playful themes and gentle, age-appropriate care. Ask about the next Kids’ Day when you schedule — they fill quickly.",
+          "A few times each month we set aside days just for our younger patients, with playful themes and gentle, age-appropriate care. Ask about the next Kids’ Day when you schedule; they fill quickly.",
       },
     ],
   },
@@ -175,7 +175,7 @@ const groups = [
 // Financing — folded onto this page as its own section (#financing). Facts
 // verbatim from products.md.
 const financingIntro =
-  "We believe quality dental care should be accessible and affordable. We offer flexible financing through CareCredit and Cherry — two providers that let you split treatment costs into monthly payments. Both have a quick application, often with a decision in minutes, and our front-desk team is happy to walk you through it.";
+  "We believe quality dental care should be accessible and affordable. We offer flexible financing through CareCredit and Cherry, two providers that let you split treatment costs into monthly payments. Both have a quick application, often with a decision in minutes, and our front-desk team is happy to walk you through it.";
 
 const financingRows = [
   {
@@ -217,22 +217,21 @@ const jumpLinks = groups
 ---
 
 <BaseLayout
-  title="Services & Pricing | Centennial Family Dentistry Snohomish — Concept Redesign"
+  title="Services & Pricing | Centennial Family Dentistry Snohomish (Concept Redesign)"
   description="What dental care costs at Centennial Family Dentistry in Snohomish, WA — routine care, restorative, cosmetic, sleep & TMJ, technology, and financing, with prices listed."
 >
   <section class="container page-head" aria-labelledby="page-title">
     <p class="eyebrow">Services &amp; pricing</p>
     <h1 id="page-title">Services &amp; Pricing</h1>
     <p class="lede">
-      Here’s what things cost. The prices below are the practice’s own published
-      rates, so you’ll know the number before you’re in the chair.
+      The prices below are the practice’s own published rates.
     </p>
     <div class="pricing-note" id="pricing-note">
       <p>
         <strong>About these prices.</strong> A few lines show a range and are
         marked with a <span aria-hidden="true">†</span>. The practice’s current
         pages list two figures for those services, so we show both here rather
-        than choose one — your exact price is confirmed at your visit. For any
+        than choose one; your exact price is confirmed at your visit. For any
         treatment not listed, call the office at
         <a href={tel}>360-568-6017</a>.
       </p>
@@ -347,9 +346,10 @@ const jumpLinks = groups
   </section>
 
   <section class="container cta-band" aria-labelledby="cta-title">
-    <h2 id="cta-title">Have a question about any of this?</h2>
-    <p>Call the office and we’ll talk it through — no phone tree, just our front desk.</p>
-    <a class="btn-call" href={tel}>Call 360-568-6017</a>
+    <h2 id="cta-title">Questions about a treatment or price?</h2>
+    <p>
+      The front desk can help: <a href={tel}>360-568-6017</a>.
+    </p>
   </section>
 </BaseLayout>
 

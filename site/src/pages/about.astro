@@ -23,133 +23,128 @@ const mapsUrl =
   "https://www.google.com/maps/search/?api=1&query=133+Maple+Ave+Snohomish+WA+98290";
 
 // -------------------------------------------------------------------------
-// THE DOCTORS — three, names/credentials verbatim from products.md (gotcha 11).
-// Photos matched to each person by the capture-log filename map (assets/
-// dr-eve-rutherford.jpg etc.), GPS/EXIF stripped before shipping.
-// Bios are REWRITTEN from the about-us evidence: first-person-singular and the
-// "form Scripps" typo are cleaned (phrasing), but every FACT — school, degree,
-// role, community service, practice days — is preserved exactly. Nothing here
-// is invented (voice Rule 10).
+// THE PEOPLE — one flat flow, doctors first, everyone in the same format
+// (mirrors the source site's own presentation: the hierarchy reads from the
+// photos, not from section headings or role labels). Names verbatim from
+// products.md (gotcha 11). Roles are woven into bio prose, verbatim titles.
+// Bios are REWRITTEN from the about-us evidence into third person: phrasing
+// may change, facts may not (voice Rule 10). Photos matched by the
+// capture-log filename map, GPS/EXIF stripped.
+// Becca has no real photo (source uses the practice logo as a placeholder), so
+// she gets a text-only card rather than a substituted face.
 // -------------------------------------------------------------------------
-const doctors = [
+const people = [
   {
     name: "Dr. Eve Rutherford DDS",
     photo: "dr-eve-rutherford.jpg",
-    alt: "Dr. Eve Rutherford",
-    bio: [
+    paras: [
       "Dr. Rutherford earned her dental degree at the University of Washington School of Dentistry, after a Bachelor of Arts with Honors in Biology from Scripps College in Claremont, California. Before dental school she worked in the University of Washington’s Department of Pathology, studying connective tissue disorders. She was raised in Kalispell, Montana, and graduated from Flathead High School.",
       "She is dedicated to improving the oral health and overall health of her patients: preventing oral disease, and teaching patients about the links between a healthy mouth and a healthy body. She loves being a dentist and serving her patients through conscious, mindful care.",
       "Her commitment reaches past the office. She has served on the Board of Directors for the Washington Dental Service Foundation since 2015, sat on a 2016 Washington State Health Care Authority task force to improve Adult Dental Medicaid benefits, stays active with the ABCD Program (Access to Baby and Child Dentistry), and is Affiliate Faculty for the University of Washington Department of Pediatric Dentistry.",
       "She has two active sons who keep her on her toes. The family enjoys hiking the trails in Snohomish County and biking the Centennial Trail, and she and her husband like golfing and going out for sushi. On her own time, she loves to run and read.",
+      "Dr. Rutherford practices Mondays, Tuesdays, Wednesdays, and Thursdays.",
     ],
-    schedule: "Practices Mondays, Tuesdays, Wednesdays, and Thursdays.",
   },
   {
     name: "Dr. Rachel Greene DDS",
     photo: "dr-rachel-greene.jpg",
-    alt: "Dr. Rachel Greene",
-    bio: [
+    paras: [
       "Dr. Rachel (Krell) Greene graduated from the University of Michigan School of Dentistry, after a Bachelor of Arts with Honors in Science, Technology and Society from the University of Puget Sound. She was born and raised in Snohomish and came home to practice in the community she grew up in. She is also a professor at the University of Washington School of Dentistry, serving as Clinical Director of Western Washington for the Service Learning Program and as a Clinical Instructor in the student patient clinic.",
       "Dentistry is her passion, and she enjoys empowering people to keep a healthy mouth. She strives to help every patient have a positive experience and feel at ease at the dentist. She empathizes with those who have dental anxiety and is more than willing to work with you to find the most comfortable way through your care. Detail-oriented by nature, she focuses on precision and strives for excellence in all her restorative work.",
+      "Dr. Greene practices on Thursdays and Fridays by appointment.",
     ],
-    schedule: "Practices on Thursdays and Fridays by appointment.",
   },
   {
     name: "Dr. Samiksha Gulrajani DMD",
     photo: "dr-samiksha-gulrajani.jpg",
-    alt: "Dr. Samiksha Gulrajani",
-    bio: [
+    paras: [
       "Dr. Gulrajani is originally from Cincinnati, Ohio. She completed undergraduate studies in Mathematics and Neuroscience at the University of Pittsburgh, graduating with honors and a minor in Chemistry, then earned her Doctor of Dental Medicine (DMD) at the University of Pittsburgh School of Dental Medicine.",
       "She went on to a residency in Advanced Education in General Dentistry (AEGD), treating complex cases at the university and at a local urgent care clinic. She specializes in comprehensive dental care, with a particular focus on patients with special needs.",
       "Outside of work, she enjoys watching for orcas and baking delicious desserts.",
+      "Dr. Gulrajani practices on Monday, Tuesday, and Wednesday.",
     ],
-    schedule: "Practices on Monday, Tuesday, and Wednesday.",
   },
-];
-
-// -------------------------------------------------------------------------
-// THE TEAM — every hygienist, assistant, and coordinator by name (voice Rule 1:
-// named people, never "our team"). Names and titles verbatim from products.md.
-// One-line descriptions are rewritten from the about-us bios, facts preserved.
-// Photos matched by the capture-log filename map, GPS/EXIF stripped.
-// "Practice Business manager" (lowercase m on the source) is title-cased here as
-// a deliberate copy-editing choice, not a fact change (gotcha 16).
-// Becca has no real photo (the source uses the practice logo as a placeholder
-// and her bio reads only "Details coming soon!"), so she gets a clean text-only
-// card rather than a substituted face (brief rule).
-// -------------------------------------------------------------------------
-const team = [
   {
     name: "Brooke",
-    title: "Dental Hygienist",
     photo: "brooke.jpg",
-    bio: "Brooke has been one of the practice’s dental hygienists since 2018. She graduated from Lake Washington in 2014 and brings 10 years of experience. She loves getting to know her patients on a personal level and helping them find what works best to keep their oral health at its best. When not in the office, she loves to garden and spend time with her husband and kids.",
+    paras: [
+      "Brooke has been one of the practice’s dental hygienists since 2018. She graduated from Lake Washington in 2014 and brings 10 years of experience. She loves getting to know her patients on a personal level and helping them find what works best to keep their oral health at its best. When not in the office, she loves to garden and spend time with her husband and kids.",
+    ],
   },
   {
     name: "Savannah",
-    title: "Dental Hygienist",
     photo: "savannah.jpg",
-    bio: "Savannah brings her expertise and passion to every patient interaction. She earned her bachelor’s degree from Seattle Central in 2016 and has been part of the Centennial team since 2021. A Pacific Northwest native, she was born and raised in Kirkland. She has a deep commitment to preventative dental care and patient education, and her approach is both thorough and compassionate. When not at the office, she enjoys quality time with her husband and two children.",
+    paras: [
+      "Savannah, a dental hygienist, has been part of the Centennial team since 2021 and earned her bachelor’s degree from Seattle Central in 2016. A Pacific Northwest native, she was born and raised in Kirkland. She has a deep commitment to preventative dental care and patient education, and her approach is both thorough and compassionate. When not at the office, she enjoys quality time with her husband and two children.",
+    ],
   },
   {
     name: "Juliana",
-    title: "Dental Hygienist",
     photo: "juliana.jpg",
-    bio: "Juliana is excited to be part of the Centennial team. Originally from Florida, she received her Bachelor of Science in Biology from Nova Southeastern University, then graduated from Indian River State College in 2013 with a degree in Dental Hygiene. She moved to Washington right after graduation and now calls the state home. She is passionate about gentle, personalized care and patient education. Outside of work, she loves spending time with her husband and their two kids, and in a spare moment you’ll find her with a good book or a movie.",
+    paras: [
+      "Juliana is excited to be part of the Centennial team. Originally from Florida, she received her Bachelor of Science in Biology from Nova Southeastern University, then graduated from Indian River State College in 2013 with a degree in Dental Hygiene. She moved to Washington right after graduation and now calls the state home. She is passionate about gentle, personalized care and patient education. Outside of work, she loves spending time with her husband and their two kids, and in a spare moment you’ll find her with a good book or a movie.",
+    ],
   },
   {
     name: "Becca",
-    title: "Dental Hygienist",
     photo: null,
-    bio: "Details coming soon!",
+    paras: ["Details coming soon!"],
   },
   {
     name: "Amaya",
-    title: "Dental Assistant",
     photo: "amaya.jpg",
-    bio: "Amaya is a dental assistant and graduated from the West Coast College of Dental Assisting in 2022. She brings her advancing skills to make every visit go as smoothly as possible, and loves helping patients feel happy and confident in their smile. When not at the office, she enjoys country music concerts and camping with her boyfriend and their dog, Piper.",
+    paras: [
+      "Amaya is a dental assistant and graduated from the West Coast College of Dental Assisting in 2022. She brings her advancing skills to make every visit go as smoothly as possible, and loves helping patients feel happy and confident in their smile. When not at the office, she enjoys country music concerts and camping with her boyfriend and their dog, Piper.",
+    ],
   },
   {
     name: "Jessica",
-    title: "Dental Assistant",
     photo: "jessica.jpg",
-    bio: "Jessica joined Centennial in 2021 with over 15 years of experience. If you’re doing Invisalign with the office, you’ll probably see her the most; she enjoys getting to know patients, especially the ones she sees every six weeks for their Invisalign check-ins. Originally from San Jose, she moved to Washington in 2018, loves spending time with her family, and is always looking for a good movie recommendation.",
+    paras: [
+      "Jessica, one of the practice’s dental assistants, joined Centennial in 2021 with over 15 years of experience. If you’re doing Invisalign with the office, you’ll probably see her the most; she enjoys getting to know patients, especially the ones she sees every six weeks for their Invisalign check-ins. Originally from San Jose, she moved to Washington in 2018, loves spending time with her family, and is always looking for a good movie recommendation.",
+    ],
   },
   {
     name: "Kadi",
-    title: "Dental Assistant",
     photo: "kadi.jpg",
-    bio: "Kadi joined Centennial in 2024 after graduating from the West Coast College of Dental Assisting. Her favorite part of each day is the time she spends with her patients; she loves getting to know people and working with those who have anxiety to give them the best possible visit. Outside the office, she enjoys time with close friends and loves getting outside.",
+    paras: [
+      "Kadi joined Centennial’s assisting team in 2024 after graduating from the West Coast College of Dental Assisting. Her favorite part of each day is the time she spends with her patients; she loves getting to know people and working with those who have anxiety to give them the best possible visit. Outside the office, she enjoys time with close friends and loves getting outside.",
+    ],
   },
   {
     name: "Yana",
-    title: "Scheduling Coordinator",
     photo: "yana.jpg",
-    bio: "Yana started with the office in 2024, coming from a medical office and bringing her passion for community and patient care. She loves making the practice’s Kids’ Days fun for everyone, parents included, and enjoys designing letters and flyers and finding ways to reach out to the community. When she’s not at the office, she’s probably hosting a dinner party or traveling with her husband.",
+    paras: [
+      "Yana, a scheduling coordinator, started with the office in 2024, coming from a medical office and bringing her passion for community and patient care. She loves making the practice’s Kids’ Days fun for everyone, parents included, and enjoys designing letters and flyers and finding ways to reach out to the community. When she’s not at the office, she’s probably hosting a dinner party or traveling with her husband.",
+    ],
   },
   {
     name: "Ciara",
-    title: "Scheduling Coordinator",
     photo: "ciara.jpg",
-    bio: "Ciara joined the team in 2024, bringing 6 years of scheduling and insurance-billing expertise. She loves when a patient can leave smiling with all the information they need. A Washington native who grew up in Lake Stevens, she’s usually either in another country or at a country music concert when she’s not in the office.",
+    paras: [
+      "Ciara, a scheduling coordinator, joined the team in 2024, bringing 6 years of scheduling and insurance-billing expertise. She loves when a patient can leave smiling with all the information they need. A Washington native who grew up in Lake Stevens, she’s usually either in another country or at a country music concert when she’s not in the office.",
+    ],
   },
   {
     name: "Kayleen",
-    title: "Scheduling Coordinator",
     photo: "kayleen.jpg",
-    bio: "Kayleen joined the team in 2025 with 8 years of experience building trusting relationships. She comes from a background in personal banking, which gave her excellent organizational skills and a passion for helping people feel taken care of, and she’s often one of the first friendly faces patients meet. A Washington native who grew up in Lake Stevens, she enjoys playing board games with her husband and spending time with their dog, Millie.",
+    paras: [
+      "Kayleen, also a scheduling coordinator, joined the team in 2025 with 8 years of experience building trusting relationships. She comes from a background in personal banking, which gave her excellent organizational skills and a passion for helping people feel taken care of, and she’s often one of the first friendly faces patients meet. A Washington native who grew up in Lake Stevens, she enjoys playing board games with her husband and spending time with their dog, Millie.",
+    ],
   },
   {
     name: "Molly",
-    title: "Financial Coordinator",
     photo: "molly.jpg",
-    bio: "Molly joined Centennial in 2023 with three years of experience in dental billing, and also holds a Dental Assisting license. She is passionate about helping patients get the most out of their insurance benefits, and will work a claim as long as it takes; her favorite calls to make are the ones where insurance paid more than expected. She’s usually back in her office but loves visiting with patients in the lobby or on the phone. Outside work, she’s somewhere in the woods with her favorite dogs, Sunny and Dottie, or on a road trip.",
+    paras: [
+      "Molly, the office’s financial coordinator, joined Centennial in 2023 with three years of experience in dental billing, and also holds a Dental Assisting license. She is passionate about helping patients get the most out of their insurance benefits, and will work a claim as long as it takes; her favorite calls to make are the ones where insurance paid more than expected. She’s usually back in her office but loves visiting with patients in the lobby or on the phone. Outside work, she’s somewhere in the woods with her favorite dogs, Sunny and Dottie, or on a road trip.",
+    ],
   },
   {
     name: "Marne",
-    title: "Practice Business Manager",
     photo: "marne.jpg",
-    bio: "Marne loves the practice’s patients and is passionate about making sure they receive quality service and attention from start to finish. In her free time, she enjoys spending time with her husband and their kids, a nice glass of wine, and relaxing on a sunny beach.",
+    paras: [
+      "Marne, the practice’s business manager, loves the practice’s patients and is passionate about making sure they receive quality service and attention from start to finish. In her free time, she enjoys spending time with her husband and their kids, a nice glass of wine, and relaxing on a sunny beach.",
+    ],
   },
 ];
 
@@ -215,77 +210,44 @@ const reviews = [
 ---
 
 <BaseLayout
-  title="Meet the Team | Centennial Family Dentistry Snohomish — Concept Redesign"
-  description="Meet the dentists and staff at Centennial Family Dentistry in Snohomish, WA — Dr. Eve Rutherford, Dr. Rachel Greene, and Dr. Samiksha Gulrajani, and the team behind them."
+  title="Meet the Team | Centennial Family Dentistry Snohomish (Concept Redesign)"
+  description="Meet the dentists and staff at Centennial Family Dentistry in Snohomish, WA: Dr. Eve Rutherford, Dr. Rachel Greene, and Dr. Samiksha Gulrajani, and the team behind them."
 >
   <!-- Page head -->
   <section class="container page-head" aria-labelledby="page-title">
     <p class="eyebrow">About Centennial Family Dentistry</p>
-    <h1 id="page-title">Meet the team</h1>
-    <p class="lede">
-      Care here has a first name. Three dentists, and every hygienist and
-      coordinator behind them, so you’ll know who you’re seeing before you sit
-      down.
-    </p>
-    <a class="btn-call page-head__cta" href={tel}>Call 360-568-6017</a>
+    <h1 id="page-title">Meet our team</h1>
   </section>
 
-  <!-- The doctors -->
-  <section class="container section" aria-labelledby="doctors-title">
-    <h2 id="doctors-title" class="section__title">The doctors</h2>
-    <div class="doctors">
+  <!-- The people: one flat flow, doctors first. The photos carry the hierarchy. -->
+  <section class="container section" aria-label="The team">
+    <ul class="people" role="list">
       {
-        doctors.map((d) => (
-          <article class="doctor">
-            <img
-              class="doctor__photo"
-              src={img(d.photo)}
-              width="600"
-              height="600"
-              loading="lazy"
-              alt={d.alt}
-            />
-            <div class="doctor__text">
-              <h3 class="doctor__name">{d.name}</h3>
-              {d.bio.map((p) => (
-                <p class="doctor__bio">{p}</p>
-              ))}
-              <p class="doctor__schedule">{d.schedule}</p>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- The team -->
-  <section class="container section" aria-labelledby="team-title">
-    <h2 id="team-title" class="section__title">The rest of the team</h2>
-    <p class="section__intro">
-      The hygienists, assistants, and coordinators who’ll clean your teeth, sit
-      with you in the chair, and answer the phone when you call.
-    </p>
-    <ul class="team" role="list">
-      {
-        team.map((m) => (
-          <li class="member">
-            {m.photo ? (
+        people.map((person) => (
+          <li class="person">
+            {person.photo ? (
               <img
-                class="member__photo"
-                src={img(m.photo)}
+                class="person__photo"
+                src={img(person.photo)}
                 width="600"
-                height="600"
+                height="800"
                 loading="lazy"
-                alt={`${m.name}, ${m.title.toLowerCase()}`}
+                alt={person.name}
               />
             ) : (
-              <div class="member__photo member__photo--placeholder" aria-hidden="true">
-                <span>{m.name.charAt(0)}</span>
+              <div
+                class="person__photo person__photo--placeholder"
+                aria-hidden="true"
+              >
+                <span>{person.name.charAt(0)}</span>
               </div>
             )}
-            <h3 class="member__name">{m.name}</h3>
-            <p class="member__title">{m.title}</p>
-            <p class="member__bio">{m.bio}</p>
+            <div class="person__text">
+              <h2 class="person__name">{person.name}</h2>
+              {person.paras.map((p) => (
+                <p class="person__bio">{p}</p>
+              ))}
+            </div>
           </li>
         ))
       }
@@ -303,15 +265,13 @@ const reviews = [
         </p>
         <p class="practice__body">
           Dr. Greene grew up in Snohomish and came back to practice in her own
-          hometown. We look at your overall health, not just your teeth — and we
-          publish our prices, so you know what care costs before you’re in the
-          chair.
+          hometown. We look at your overall health, not just your teeth, and we
+          publish our prices.
         </p>
         <p class="practice__body">
-          You’ll find us at 133 Maple Ave in Snohomish. To book, call the office
-          — there’s no form and no phone tree, just our front desk.
+          The office is at 133 Maple Ave in Snohomish. To book an appointment,
+          call <a href={tel}>360-568-6017</a>.
         </p>
-        <a class="btn-call practice__cta" href={tel}>Call 360-568-6017</a>
       </div>
       <div class="practice__media">
         <img
@@ -367,7 +327,6 @@ const reviews = [
         <p class="contact__line">
           <a href={`mailto:${email}`}>{email}</a>
         </p>
-        <a class="btn-call contact__cta" href={tel}>Call 360-568-6017</a>
       </div>
       <div class="contact__col">
         <h3 class="contact__sub">Check us out on our socials</h3>
@@ -436,23 +395,26 @@ const reviews = [
     color: var(--color-ink);
   }
 
-  /* --- The doctors ---------------------------------------------------------- */
-  .doctors {
+  /* --- The people ------------------------------------------------------------ */
+  /* One flow, everyone in the same row format: large portrait beside the bio.
+     Uniform vertical rhythm keeps every photo evenly spaced. */
+  .people {
+    list-style: none;
+    padding: 0;
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-xl);
-    margin-top: var(--space-lg);
+    gap: var(--space-2xl);
   }
 
-  .doctor {
+  .person {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-md);
+    align-items: start;
   }
 
-  .doctor__photo {
+  .person__photo {
     width: 100%;
-    max-width: 360px;
     /* Portrait crop matched to the source headshots (mostly 3:4). Square-cropping
        lopped the tops of heads (Dr. Greene's is a taller 2:3); object-position
        biased upward keeps every face intact. */
@@ -463,50 +425,7 @@ const reviews = [
     box-shadow: var(--shadow);
   }
 
-  .doctor__name {
-    color: var(--color-ink);
-    margin-bottom: var(--space-sm);
-  }
-
-  .doctor__bio {
-    margin-bottom: var(--space-sm);
-    color: var(--color-ink);
-  }
-
-  .doctor__schedule {
-    font-family: var(--font-ui);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--color-ink-muted);
-    margin-top: var(--space-xs);
-  }
-
-  /* --- The team ------------------------------------------------------------- */
-  .team {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl) var(--space-lg);
-    margin-top: var(--space-lg);
-  }
-
-  .member {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .member__photo {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    object-position: 50% 15%;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-  }
-
-  .member__photo--placeholder {
+  .person__photo--placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -515,35 +434,22 @@ const reviews = [
     box-shadow: none;
   }
 
-  .member__photo--placeholder span {
+  .person__photo--placeholder span {
     font-family: var(--font-display);
     font-size: var(--text-h1);
     font-weight: 600;
     color: var(--color-green);
   }
 
-  .member__name {
+  .person__name {
     font-size: var(--text-h3);
     color: var(--color-ink);
-    margin-top: var(--space-sm);
+    margin-bottom: var(--space-sm);
   }
 
-  .member__title {
-    font-family: var(--font-ui);
-    font-size: var(--text-xs);
-    font-weight: 600;
-    letter-spacing: var(--tracking-caps);
-    text-transform: uppercase;
-    color: var(--color-green);
-    margin-top: var(--space-3xs);
-  }
-
-  .member__bio {
-    max-width: none;
-    font-size: var(--text-sm);
-    line-height: var(--leading-body);
+  .person__bio {
     color: var(--color-ink);
-    margin-top: var(--space-sm);
+    margin-bottom: var(--space-sm);
   }
 
   /* --- The practice --------------------------------------------------------- */
@@ -664,19 +570,11 @@ const reviews = [
 
   /* --- Wider viewports (breakpoint 768, matching the shell) ----------------- */
   @media (min-width: 768px) {
-    .doctor {
-      grid-template-columns: 300px 1fr;
+    .person {
+      /* Original-scale portraits: the photo column is ~460px of the 1120px
+         container, close to the source site's 559px-wide headshot display. */
+      grid-template-columns: 460px 1fr;
       gap: var(--space-xl);
-      align-items: start;
-    }
-
-    .doctor__photo {
-      max-width: 300px;
-    }
-
-    .team {
-      /* Two columns so each person's full bio has room to breathe. */
-      grid-template-columns: repeat(2, 1fr);
     }
 
     .practice__grid {
@@ -689,12 +587,6 @@ const reviews = [
 
     .contact__grid {
       grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (min-width: 1080px) {
-    .team {
-      grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>
