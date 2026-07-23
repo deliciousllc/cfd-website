@@ -114,3 +114,5 @@ is the strongest single piece of evidence behind the serif direction and the
 cheapest to confirm. Next consumer is Task 9, which copies these token values
 verbatim into `site/src/styles/global.css`; nothing in the site has been built
 against them yet, so no ripple-check has been exercised.
+
+**Last shipped (2026-07-22):** cfd-website 3-page pitch built and deployed live at https://deliciousllc.github.io/cfd-website/ — brand system drove the Astro site; all tasks reviewed; final whole-branch review clean; facts re-verified against source (no drift).

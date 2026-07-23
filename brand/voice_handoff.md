@@ -108,3 +108,5 @@ plus the site's typos are classed as errors the rewrite fixes, not voice to
 preserve. Next consumers are Tasks 10–12, which write the actual home, services,
 and financing copy against these rules; no page copy has been drafted yet, so no
 rule has been exercised against real headlines.
+
+**Last shipped (2026-07-22):** cfd-website 3-page pitch built and deployed live at https://deliciousllc.github.io/cfd-website/ — brand system drove the Astro site; all tasks reviewed; final whole-branch review clean; facts re-verified against source (no drift).
